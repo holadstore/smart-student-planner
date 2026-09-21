@@ -1,0 +1,9 @@
+{
+  "name": "Year 5 Knowledge Quest",
+  "short_name": "Knowledge Quest",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#071426",
+  "theme_color": "#071426",
+  "description": "A playful Year 5 English, Maths and Science learning adventure."
+}
