@@ -208,3 +208,103 @@
       if(passed){const set=completedSet(quiz.world);set.add(quiz.section);setCompleted(quiz.world,set);showModal('Mission mastered!','You scored '+quiz.correct+' out of '+quiz.total+'. This textbook section is now marked as mastered.',()=>renderWorld());}
       else{showModal('Mission complete','You scored '+quiz.correct+' out of '+quiz.total+'. Review the lesson and try again for mastery.',()=>renderMission());}
       return;
+    }
+    if(quiz.mode==='boss'){
+      const won=quiz.correct>=4;if(won){state.worldBoss[quiz.world]=true;state.coins+=30;state.xp+=50;save();confetti();showModal('World Boss defeated!','You scored '+quiz.correct+'/5 and earned +30 coins and +50 XP.',()=>renderWorld());}else{showModal('Boss challenge complete','You scored '+quiz.correct+'/5. Reach 4/5 to defeat the boss.',()=>renderWorld());}return;
+    }
+    showModal('Arcade run complete','You scored '+quiz.correct+' out of '+quiz.total+'. Keep playing to grow your XP and streak.',renderHome);
+  }
+
+  function renderTeacher(){
+    setActiveNav('progress');
+    const o=overall();
+    app.innerHTML=`<section class="panel"><div class="toolbar"><button class="btn btn-ghost" id="teacherBack">← Home</button><span class="pill">Parent / Teacher View</span></div><div class="section-head"><div><h2>${esc(state.playerName)}'s learning progress</h2><p>Progress is stored only in this browser on this device.</p></div></div>
+      <section class="stats-strip"><div class="stat-card"><small>Overall</small><strong>${o.pct}%</strong></div><div class="stat-card"><small>XP</small><strong>${state.xp}</strong></div><div class="stat-card"><small>Stars</small><strong>${state.stars}</strong></div><div class="stat-card"><small>Best streak</small><strong>${state.bestStreak}</strong></div></section>
+      <div style="margin-top:18px">${Object.entries(CONTENT).map(([k,w])=>`<div class="teacher-row"><div><strong>${w.icon} ${esc(w.label)}</strong><div class="muted">${completedSet(k).size} of ${w.sections.length} sections mastered ${state.worldBoss[k]?'· Boss defeated 🏆':''}</div></div><strong>${worldPct(k)}%</strong></div>`).join('')}</div>
+      <div class="lesson-box"><h4>📚 Coverage</h4><p>The learning map covers the full English, Maths and Science section structure used to build this game, with progress shown by subject and section.</p></div>
+      <div class="hero-actions"><button id="resetProgress" class="btn btn-ghost">Reset progress</button></div></section>`;
+    document.getElementById('teacherBack').onclick=renderHome;
+    document.getElementById('resetProgress').onclick=()=>showModal('Reset all progress?','This clears stars, XP, coins, streaks, mastered sections and boss badges on this device.',()=>{state=fresh();save();renderTeacher();},true);
+  }
+
+  function renderChallenges(){
+    setActiveNav('challenges');
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Challenge Centre</div><h2>Choose how you want to play</h2><p class="muted">Mix the three subjects or focus on one world.</p><div class="challenge-choice-grid">
+      <button class="challenge-choice" data-arcade="all"><span>⚡</span><strong>10-Question Arcade</strong><small>Questions from all three worlds</small></button>
+      <button class="challenge-choice" data-arcade="english"><span>📚</span><strong>English Sprint</strong><small>5 quick English questions</small></button>
+      <button class="challenge-choice" data-arcade="maths"><span>🔢</span><strong>Maths Sprint</strong><small>5 quick Maths questions</small></button>
+      <button class="challenge-choice" data-arcade="science"><span>🔬</span><strong>Science Sprint</strong><small>5 quick Science questions</small></button>
+    </div></section>`;
+    app.querySelectorAll('[data-arcade]').forEach(b=>b.onclick=()=>{const v=b.dataset.arcade;startArcade(v==='all'?null:v,v==='all'?10:5);});
+  }
+
+  function achievementData(){
+    const o=overall();
+    return [
+      ['🌱','First Step','Master your first section',o.done>=1],
+      ['🔥','On a Roll','Reach a 5-answer streak',state.bestStreak>=5],
+      ['📚','English Explorer','Master every English section',worldPct('english')===100],
+      ['🔢','Maths Master','Master every Maths section',worldPct('maths')===100],
+      ['🔬','Science Investigator','Master every Science section',worldPct('science')===100],
+      ['👑','Knowledge Champion','Master all three worlds',o.pct===100]
+    ];
+  }
+  function renderAchievements(){
+    setActiveNav('achievements');
+    const data=achievementData();
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Achievement Hall</div><h2>Your badges</h2><p class="muted">Every badge marks real progress through the learning worlds.</p><div class="achievement-grid">${data.map(([i,t,d,u])=>`<div class="achievement-card ${u?'unlocked':''}"><span>${i}</span><strong>${t}</strong><small>${d}</small><b>${u?'Unlocked':'Locked'}</b></div>`).join('')}</div></section>`;
+  }
+  function renderBests(){
+    setActiveNav('bests');
+    const o=overall();
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Personal Bests</div><h2>Beat your own score</h2><p class="muted">Progress stays private on this device, so learners can focus on beating their own best rather than competing with strangers.</p><section class="stats-strip"><div class="stat-card"><small>Best streak</small><strong>${state.bestStreak}</strong></div><div class="stat-card"><small>Knowledge XP</small><strong>${state.xp}</strong></div><div class="stat-card"><small>Stars</small><strong>${state.stars}</strong></div><div class="stat-card"><small>Overall mastery</small><strong>${o.pct}%</strong></div></section><div class="lesson-box"><h4>🏆 Next target</h4><p>${o.pct<100?'Complete another textbook section or improve your answer streak to set a new personal best.':'You have mastered every section. Keep using Arcade mode to sharpen speed and recall.'}</p></div></section>`;
+  }
+  function renderSettings(){
+    setActiveNav('settings');
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Settings</div><h2>Game preferences</h2><div class="settings-list"><button id="settingSound" class="setting-row"><span><strong>Game sound</strong><small>Short feedback tones for answers</small></span><b>${state.sound?'On':'Off'}</b></button><button id="settingProfile" class="setting-row"><span><strong>Player profile</strong><small>Change nickname and avatar</small></span><b>›</b></button><button id="settingPrivacy" class="setting-row"><span><strong>Privacy</strong><small>No account or public child profile is required</small></span><b>›</b></button><button id="settingReset" class="setting-row danger"><span><strong>Reset progress</strong><small>Clear progress saved on this device</small></span><b>›</b></button></div></section>`;
+    document.getElementById('settingSound').onclick=()=>{state.sound=!state.sound;save();renderSettings();};
+    document.getElementById('settingProfile').onclick=renderProfile;
+    document.getElementById('settingPrivacy').onclick=()=>showModal('Privacy','No account is required. The nickname and learning progress are stored only in this browser on this device. This build does not send that information to a server.');
+    document.getElementById('settingReset').onclick=()=>showModal('Reset all progress?','This clears stars, XP, coins, streaks and mastered sections on this device.',()=>{state=fresh();save();renderSettings();},true);
+  }
+  function renderSearch(query){
+    const q=query.trim().toLowerCase();if(!q){renderHome();return;}
+    setActiveNav('home');
+    const results=[];
+    Object.entries(CONTENT).forEach(([wk,w])=>w.sections.forEach((s,si)=>{
+      const hay=[s.title,s.lesson,s.explain,...s.topics].join(' ').toLowerCase();
+      if(hay.includes(q))results.push({wk,w,si,s});
+    }));
+    app.innerHTML=`<section class="panel feature-view"><div class="toolbar"><button class="btn btn-ghost" id="searchBack">← Home</button><span class="pill">Search</span></div><div class="section-head"><div><h2>Results for “${esc(query)}”</h2><p>${results.length} matching section${results.length===1?'':'s'}.</p></div></div><div class="search-results">${results.length?results.map((r,i)=>`<button class="search-result" data-r="${i}"><span>${r.w.icon}</span><span><strong>${esc(r.s.title)}</strong><small>${esc(r.w.label)} · ${r.s.topics.filter(t=>t.toLowerCase().includes(q)).slice(0,3).map(esc).join(', ')||'Relevant section'}</small></span><b>›</b></button>`).join(''):'<div class="lesson-box"><p>No section matched that search. Try a broader keyword such as fractions, punctuation, forces, reading or materials.</p></div>'}</div></section>`;
+    document.getElementById('searchBack').onclick=renderHome;
+    app.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const r=results[Number(b.dataset.r)];activeWorld=r.wk;activeSection=r.si;setActiveNav(r.wk);renderMission();});
+  }
+
+  function renderProfile(){
+    const back=document.createElement('div');back.className='modal-backdrop';back.innerHTML=`<div class="modal"><button class="close-x" aria-label="Close">×</button><div class="eyebrow" style="color:#667085">Player profile</div><h2>Make the adventure yours</h2><div class="profile-grid">${avatars.map(a=>`<button type="button" class="avatar-btn ${a===state.avatar?'active':''}" data-avatar="${a}">${a}</button>`).join('')}</div><div class="form-row"><label for="playerNameInput">Player name or nickname</label><input id="playerNameInput" maxlength="20" value="${esc(state.playerName)}" autocomplete="off" /></div><div class="hero-actions"><button class="btn btn-accent" id="saveProfile">Save profile</button><button class="btn btn-ghost" id="privacyInfo">Privacy</button></div></div>`;document.body.appendChild(back);
+    let selected=state.avatar;back.querySelectorAll('[data-avatar]').forEach(b=>b.onclick=()=>{selected=b.dataset.avatar;back.querySelectorAll('[data-avatar]').forEach(x=>x.classList.toggle('active',x===b));});
+    const close=()=>back.remove();back.querySelector('.close-x').onclick=close;back.querySelector('#saveProfile').onclick=()=>{const v=back.querySelector('#playerNameInput').value.trim();state.playerName=(v||'Explorer').slice(0,20);state.avatar=selected;save();close();renderHome();};back.querySelector('#privacyInfo').onclick=()=>showModal('Privacy','No account is required. The nickname and learning progress are stored only in this browser on this device. This build does not send that information to a server.');
+  }
+
+  function showModal(title,text,onOk=null,danger=false){const back=document.createElement('div');back.className='modal-backdrop';back.innerHTML=`<div class="modal"><button class="close-x" aria-label="Close">×</button><h2>${esc(title)}</h2><p class="muted">${esc(text)}</p><div class="hero-actions"><button class="btn ${danger?'btn-dark':'btn-accent'}" id="modalOk">${onOk?'Continue':'OK'}</button></div></div>`;document.body.appendChild(back);const close=()=>back.remove();back.querySelector('.close-x').onclick=close;back.querySelector('#modalOk').onclick=()=>{close();if(onOk)onOk();};}
+
+  document.getElementById('brandBtn').onclick=renderHome;
+  document.getElementById('profileBtn').onclick=renderProfile;
+  document.getElementById('soundBtn').onclick=()=>{state.sound=!state.sound;save();};
+  document.getElementById('navHome').onclick=renderHome;
+  document.getElementById('navProgress').onclick=renderTeacher;
+  document.getElementById('navEnglish').onclick=()=>openWorld('english');
+  document.getElementById('navMaths').onclick=()=>openWorld('maths');
+  document.getElementById('navScience').onclick=()=>openWorld('science');
+  document.getElementById('navChallenges').onclick=renderChallenges;
+  document.getElementById('navAchievements').onclick=renderAchievements;
+  document.getElementById('navProfile').onclick=renderProfile;
+  document.getElementById('navLeaderboard').onclick=renderBests;
+  document.getElementById('navSettings').onclick=renderSettings;
+  const search=document.getElementById('globalSearch');
+  search.addEventListener('keydown',e=>{if(e.key==='Enter')renderSearch(search.value);});
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;document.getElementById('installBtn').classList.remove('hidden');});
+  document.getElementById('installBtn').onclick=async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;document.getElementById('installBtn').classList.add('hidden');};
+  updateTop();renderHome();
+  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+})();
