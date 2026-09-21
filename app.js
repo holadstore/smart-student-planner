@@ -103,3 +103,108 @@
         <button class="quick-card" id="teacherView"><span class="quick-icon">📊</span><span><strong>Parent / Teacher</strong><small>See learning progress at a glance</small></span><b>›</b></button>
       </section>`;
     document.getElementById('startAdventure').onclick=()=>{
+      const next=Object.keys(CONTENT).find(k=>worldPct(k)<100)||'english';openWorld(next);
+    };
+    document.getElementById('quickPlay').onclick=()=>startArcade();
+    document.getElementById('journeyProgress').onclick=renderTeacher;
+    document.getElementById('dailyCard').onclick=()=>startArcade(null,5);
+    document.getElementById('petCard').onclick=renderProfile;
+    document.getElementById('bestCard').onclick=renderBests;
+    document.getElementById('teacherView').onclick=renderTeacher;
+    app.querySelectorAll('[data-world]').forEach(b=>b.onclick=()=>openWorld(b.dataset.world));
+  }
+  function worldCard(k,w){
+    const pct=worldPct(k);
+    const copy=k==='english'?'Words open new worlds.':'maths'===k?'Numbers power your future.':'Discover. Question. Understand.';
+    const bullets=k==='english'?['Word classes, punctuation & sentences','Writing, stories & text types','Reading & comprehension','Spelling & tricky words']:k==='maths'?['Number & place value','Calculations & problem solving','Fractions, decimals & percentages','Measure, geometry & statistics']:['Living things & the human body','Materials & their properties','Forces, electricity, light & sound','Earth, space & scientific enquiry'];
+    return `<button class="world-card premium-world ${worldClass(k)}" data-world="${k}">
+      <div class="world-scene ${worldClass(k)}-scene"><div class="scene-orb scene-a"></div><div class="scene-orb scene-b"></div><span class="scene-symbol">${w.icon}</span><span class="section-count">${w.sections.length} SECTIONS</span></div>
+      <div class="world-content"><div class="world-title-row"><span class="world-icon">${w.icon}</span><div><h3>${esc(w.label)}</h3><p>${copy}</p></div></div>
+      <ul>${bullets.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+      <div class="progress-mini"><div class="progress"><i style="width:${pct}%"></i></div><div class="progress-label"><span>${completedSet(k).size}/${w.sections.length} mastered</span><span>${pct}%</span></div></div>
+      <span class="explore-cta">Explore ${esc(w.label)} →</span></div></button>`;
+  }
+
+  function openWorld(w){activeWorld=w;activeSection=0;setActiveNav(w);renderWorld();}
+  function renderWorld(){
+    const w=CONTENT[activeWorld],done=completedSet(activeWorld),pct=worldPct(activeWorld),bossReady=pct===100;
+    app.innerHTML=`<section class="panel"><div class="toolbar"><button class="btn btn-ghost" id="homeBtn">← Home</button><span class="pill">${w.icon} ${esc(w.label)}</span><span class="pill">${done.size}/${w.sections.length} sections mastered</span><span class="pill">${pct}% complete</span></div></section>
+    <div class="grid-2" style="margin-top:16px">
+      <section class="panel"><div class="section-head" style="margin-top:0"><div><h2>Adventure Map</h2><p>Pick a mission. Every mission represents a major learning section.</p></div></div><div class="map">${w.sections.map((s,i)=>missionCard(s,i,done)).join('')}</div></section>
+      <aside>
+        <section class="panel"><h3>World rewards</h3><div class="badge-grid"><div class="badge ${pct>=25?'unlocked':''}"><strong>🥉 Explorer</strong><span class="muted">25% complete</span></div><div class="badge ${pct>=50?'unlocked':''}"><strong>🥈 Pathfinder</strong><span class="muted">50% complete</span></div><div class="badge ${pct>=75?'unlocked':''}"><strong>🥇 Scholar</strong><span class="muted">75% complete</span></div><div class="badge ${pct===100?'unlocked':''}"><strong>🏆 World Master</strong><span class="muted">100% complete</span></div></div></section>
+        <section class="panel" style="margin-top:16px"><h3>Final World Challenge</h3><p class="muted">Complete every section, then take a 5-question boss challenge.</p><button class="btn ${bossReady?'btn-dark':'btn-ghost'}" id="bossBtn" ${bossReady?'':'disabled'}>${state.worldBoss[activeWorld]?'🏆 Boss defeated':'⚔️ Start Boss Challenge'}</button></section>
+        <section class="panel" style="margin-top:16px"><h3>How to play</h3><p class="muted">Learn the section, inspect every topic, complete the 3-question challenge and earn a mastery star.</p></section>
+      </aside>
+    </div>`;
+    document.getElementById('homeBtn').onclick=renderHome;
+    document.getElementById('bossBtn').onclick=()=>{if(bossReady)startBoss(activeWorld);};
+    app.querySelectorAll('[data-section]').forEach(b=>b.onclick=()=>{activeSection=Number(b.dataset.section);renderMission();});
+  }
+  function missionCard(s,i,done){const qCount=CONTENT[activeWorld].questions.filter(q=>q.section===i).length;return `<button class="mission ${done.has(i)?'done':''}" data-section="${i}"><span class="mission-num">${done.has(i)?'✓':i+1}</span><span><span class="mission-title">${esc(s.title)}</span><span class="mission-sub">${s.topics.length} textbook topics</span><span class="mission-progress">${qCount} challenge question${qCount===1?'':'s'} in this build</span></span><span class="mission-star">${done.has(i)?'⭐':'›'}</span></button>`;}
+
+  function renderMission(){
+    const w=CONTENT[activeWorld],s=w.sections[activeSection],done=completedSet(activeWorld).has(activeSection),qCount=questionPool(activeWorld,activeSection).length;
+    app.innerHTML=`<section class="panel">
+      <div class="toolbar"><button class="btn btn-ghost" id="backWorld">← ${esc(w.label)}</button><span class="pill">Mission ${activeSection+1}/${w.sections.length}</span>${done?'<span class="pill">⭐ Mastered</span>':''}</div>
+      <div class="section-head"><div><h2>${esc(s.title)}</h2><p>Learn first. Think aloud. Then enter the challenge arena.</p></div><div style="font-size:46px">${w.icon}</div></div>
+      <div class="lesson-steps"><div class="learn-step"><b>1. 📖 Learn</b><span>Read the mission briefing and connect it to the section topics.</span></div><div class="learn-step"><b>2. 🗣️ Explain</b><span>Use the explain-it prompt to put the idea into your own words.</span></div><div class="learn-step"><b>3. 🎯 Play</b><span>Complete three challenge rounds and aim for mastery.</span></div></div>
+      <div class="lesson-box"><h4>📖 Mission briefing</h4><p>${esc(s.lesson)}</p></div>
+      <div class="lesson-box"><h4>🧭 Everything in this section</h4><div class="topic-chips">${s.topics.map(t=>`<span class="topic-chip">${esc(t)}</span>`).join('')}</div></div>
+      <div class="lesson-box"><h4>🗣️ Explain-it mission</h4><p>${esc(s.explain)}</p></div>
+      <div class="hero-actions" style="margin-top:16px"><button class="btn btn-accent" id="startChallenge">🎯 Start 3-Round Challenge</button><button class="btn btn-ghost" id="randomChallenge">🎲 Surprise Me</button></div>
+      <p class="muted" style="font-size:12px;margin-bottom:0">This section currently has ${qCount} original challenge question${qCount===1?'':'s'} in rotation. More questions can be added without changing your progress.</p>
+    </section>`;
+    document.getElementById('backWorld').onclick=renderWorld;
+    document.getElementById('startChallenge').onclick=()=>startSectionQuiz(activeWorld,activeSection);
+    document.getElementById('randomChallenge').onclick=()=>startArcade(activeWorld,5);
+  }
+
+  function questionPool(world,section=null){const qs=CONTENT[world].questions;return section===null?qs:qs.filter(q=>q.section===section);}
+  function chooseQuestion(world,section=null){const pool=questionPool(world,section);if(!pool.length)return null;const key=world+':'+(section===null?'all':section);const n=state.attempts[key]||0;state.attempts[key]=n+1;save();return pool[n%pool.length];}
+  function randomQuestion(world=null){const w=world||shuffle(Object.keys(CONTENT))[0];const q=shuffle(CONTENT[w].questions)[0];return {world:w,q};}
+  function startSectionQuiz(world,section){const q=chooseQuestion(world,section);if(!q)return;quiz={mode:'section',world,section,q,round:1,total:3,correct:0,streak:0,hint:false,removed:[]};renderQuiz();}
+  function startArcade(world=null,total=10){const pick=randomQuestion(world);quiz={mode:'arcade',world:pick.world,section:pick.q.section,q:pick.q,round:1,total,correct:0,streak:0,hint:false,removed:[]};renderQuiz();}
+  function startBoss(world){const pick=randomQuestion(world);quiz={mode:'boss',world,section:pick.q.section,q:pick.q,round:1,total:5,correct:0,streak:0,hint:false,removed:[]};renderQuiz();}
+
+  function renderQuiz(){
+    const w=CONTENT[quiz.world],s=w.sections[quiz.section],q=quiz.q,pct=Math.round((quiz.round-1)/quiz.total*100);
+    const label=quiz.mode==='section'?'Mission Challenge':quiz.mode==='boss'?'World Boss Challenge':'Arcade Mode';
+    app.innerHTML=`<section class="panel challenge-shell">
+      <div class="quiz-progress"><i style="width:${pct}%"></i></div>
+      <div class="quiz-meta"><span class="pill">${w.icon} ${esc(s.title)}</span><span class="pill">Round ${quiz.round}/${quiz.total}</span><span class="pill">✅ ${quiz.correct}</span><span class="pill">🔥 ${quiz.streak}</span></div>
+      <div class="eyebrow" style="color:#667085">${label}</div>
+      <h2 class="question">${esc(q.q)}</h2>
+      <div class="answers" id="answerGrid">${q.a.map((x,i)=>`<button class="answer" data-answer="${i}"><strong>${String.fromCharCode(65+i)}.</strong> ${esc(x)}</button>`).join('')}</div>
+      <div id="feedback" class="feedback hidden"></div>
+      <div class="power-row"><button class="power" id="hintPower">💡 Hint <small>−2 coins</small></button><button class="power" id="fiftyPower">✂️ 50/50 <small>−3 coins</small></button><button class="power" id="quitQuiz">← Leave challenge</button></div>
+    </section>`;
+    app.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>submitAnswer(Number(b.dataset.answer)));
+    document.getElementById('hintPower').onclick=useHint;
+    document.getElementById('fiftyPower').onclick=useFifty;
+    document.getElementById('quitQuiz').onclick=()=>quiz.mode==='section'?renderMission():quiz.mode==='boss'?renderWorld():renderHome();
+  }
+  function useHint(){if(quiz.hint)return;if(state.coins<2){showModal('Not enough coins','Complete challenges to earn more coins.');return;}state.coins-=2;quiz.hint=true;save();const f=document.getElementById('feedback');f.classList.remove('hidden');f.innerHTML='<strong>Hint:</strong> '+esc(quiz.q.h);beep('hint');}
+  function useFifty(){if(quiz.removed.length)return;if(state.coins<3){showModal('Not enough coins','Complete challenges to earn more coins.');return;}const wrong=[0,1,2,3].filter(i=>i!==quiz.q.c);quiz.removed=shuffle(wrong).slice(0,2);state.coins-=3;save();quiz.removed.forEach(i=>{const b=document.querySelector(`[data-answer="${i}"]`);if(b){b.disabled=true;b.style.visibility='hidden';}});beep('hint');}
+  function submitAnswer(i){
+    const correct=i===quiz.q.c;app.querySelectorAll('[data-answer]').forEach(b=>b.disabled=true);
+    const chosen=document.querySelector(`[data-answer="${i}"]`),right=document.querySelector(`[data-answer="${quiz.q.c}"]`);if(right)right.classList.add('correct');if(!correct&&chosen)chosen.classList.add('wrong');
+    const feedback=document.getElementById('feedback');feedback.classList.remove('hidden');
+    if(correct){const gain=quiz.hint?8:12;state.xp+=gain;state.coins+=3;state.stars+=1;quiz.correct++;quiz.streak++;state.bestStreak=Math.max(state.bestStreak,quiz.streak);recordCorrect();beep('ok');feedback.innerHTML=`<strong>Great job!</strong> ${esc(quiz.q.e)}<br><strong>+${gain} XP · +3 coins · +1 star</strong>`;confetti();}
+    else{quiz.streak=0;beep('bad');feedback.innerHTML=`<strong>Good try.</strong> ${esc(quiz.q.e)}<br>Use the explanation to strengthen your next answer.`;}
+    save();
+    const action=document.createElement('div');action.className='hero-actions';action.style.marginTop='14px';const next=document.createElement('button');next.className='btn btn-dark';next.textContent=quiz.round>=quiz.total?'Finish Challenge':'Next Round';next.onclick=nextQuestion;action.appendChild(next);feedback.appendChild(action);
+  }
+  function nextQuestion(){
+    if(quiz.round>=quiz.total){finishQuiz();return;}
+    quiz.round++;quiz.hint=false;quiz.removed=[];
+    if(quiz.mode==='section'){quiz.q=chooseQuestion(quiz.world,quiz.section);}
+    else{const pick=randomQuestion(quiz.world);quiz.world=pick.world;quiz.q=pick.q;quiz.section=pick.q.section;}
+    renderQuiz();
+  }
+  function finishQuiz(){
+    if(quiz.mode==='section'){
+      const passed=quiz.correct>=2;
+      if(passed){const set=completedSet(quiz.world);set.add(quiz.section);setCompleted(quiz.world,set);showModal('Mission mastered!','You scored '+quiz.correct+' out of '+quiz.total+'. This textbook section is now marked as mastered.',()=>renderWorld());}
+      else{showModal('Mission complete','You scored '+quiz.correct+' out of '+quiz.total+'. Review the lesson and try again for mastery.',()=>renderMission());}
+      return;
