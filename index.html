@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#071426" />
+  <meta name="description" content="Year 5 Knowledge Quest — a playful English, Maths and Science learning adventure for UK Year 5 and Key Stage 2." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Year 5 Knowledge Quest" />
+  <meta property="og:description" content="Learn, play and build confidence in Year 5 English, Maths and Science." />
+  <meta property="og:type" content="website" />
+  <title>Year 5 Knowledge Quest</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#app">Skip to game</a>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+
+  <div class="site-shell">
+    <aside class="side-nav" aria-label="Main navigation">
+      <button id="brandBtn" class="side-brand" aria-label="Go to home">
+        <span class="brand-mark" aria-hidden="true">📖</span>
+        <span class="side-brand-copy"><strong>Knowledge Quest</strong><small>Learn • Explore • Achieve</small></span>
+      </button>
+
+      <nav class="side-links">
+        <button id="navHome" class="side-link active"><span>⌂</span><b>Home</b></button>
+        <button id="navProgress" class="side-link"><span>▥</span><b>My Progress</b></button>
+        <button id="navEnglish" class="side-link"><span>📚</span><b>English World</b></button>
+        <button id="navMaths" class="side-link"><span>π</span><b>Maths World</b></button>
+        <button id="navScience" class="side-link"><span>⚗</span><b>Science World</b></button>
+        <button id="navChallenges" class="side-link"><span>🎯</span><b>Challenges</b></button>
+        <button id="navAchievements" class="side-link"><span>🏅</span><b>Achievements</b></button>
+        <button id="navProfile" class="side-link"><span>🦉</span><b>Pets & Avatar</b></button>
+        <button id="navLeaderboard" class="side-link"><span>▥</span><b>Personal Bests</b></button>
+        <button id="navSettings" class="side-link"><span>⚙</span><b>Settings</b></button>
+      </nav>
+
+      <div class="side-quote">“Small steps lead to big results.”</div>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <div class="search-shell" aria-label="Search learning topics">
+          <span aria-hidden="true">⌕</span>
+          <input id="globalSearch" type="search" placeholder="Search topics, skills or keywords…" autocomplete="off" />
+        </div>
+        <div class="top-stats" aria-label="Player progress">
+          <span title="Knowledge experience">⭐ <strong id="xpTop">0</strong> <small>XP</small></span>
+          <span title="Quest coins">🪙 <strong id="coinsTop">20</strong></span>
+          <span class="level-chip"><small>Level</small> <strong id="levelTop">1</strong></span>
+          <button id="profileBtn" class="profile-chip" aria-label="Player profile"><span id="avatarTop">🦉</span><span id="playerTop">Explorer</span></button>
+          <button id="installBtn" class="icon-btn hidden" aria-label="Install app" title="Install app">⬇️</button>
+          <button id="soundBtn" class="icon-btn" aria-label="Toggle game sound" title="Sound">🔊</button>
+        </div>
+      </header>
+
+      <main id="app" class="app-main" aria-live="polite"></main>
+
+      <footer class="footer">
+        <span>Year 5 Knowledge Quest • English, Maths and Science learning for UK Key Stage 2.</span>
+        <span class="footer-links"><a href="about.html">About</a><a href="parents.html">Parents &amp; Teachers</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
+        <span>Progress stays on this device. No account is required.</span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
