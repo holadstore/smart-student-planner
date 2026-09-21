@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#071426" />
+  <meta name="description" content="Year 5 Knowledge Quest — a playful English, Maths and Science learning adventure for UK Year 5 and Key Stage 2." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Year 5 Knowledge Quest" />
+  <meta property="og:description" content="Learn, play and build confidence in Year 5 English, Maths and Science." />
+  <meta property="og:type" content="website" />
+  <title>Year 5 Knowledge Quest</title>
+  <style>:root{
+  --bg:#081020;--bg2:#0d1730;--panel:#111b36;--card:#fff;--ink:#101828;--muted:#667085;--muted2:#98a2b3;
+  --line:#d0d5dd;--soft:#f2f4f7;--blue:#3973f4;--purple:#7a5af8;--green:#12b76a;--gold:#fdb022;--red:#f04438;--cyan:#36bffa;
+  --shadow:0 20px 60px rgba(3,8,20,.22);--shadow-soft:0 12px 34px rgba(3,8,20,.14);--radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 10% 10%,#152a59 0,transparent 31%),radial-gradient(circle at 90% 5%,#342461 0,transparent 28%),linear-gradient(180deg,var(--bg),var(--bg2) 55%,#091226);color:#fff;min-height:100vh;overflow-x:hidden}
+button,select,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.skip-link{position:absolute;left:-9999px;top:auto}.skip-link:focus{left:12px;top:12px;z-index:999;background:#fff;color:#101828;padding:10px 14px;border-radius:10px}
+.ambient{position:fixed;border-radius:50%;filter:blur(80px);opacity:.16;pointer-events:none;z-index:-1}.ambient-a{width:320px;height:320px;left:-80px;top:25%;background:#3973f4}.ambient-b{width:360px;height:360px;right:-120px;top:52%;background:#7a5af8}
+.app-shell{max-width:1180px;margin:auto;padding:18px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(10,18,40,.72);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(18px);padding:12px 14px;border-radius:20px;position:sticky;top:10px;z-index:20;box-shadow:0 12px 40px rgba(0,0,0,.15)}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;text-align:left;padding:0}.brand strong{display:block;font-size:15px}.brand small{display:block;color:#b8c0d9;margin-top:2px}.brand-mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#8c6cf7,#3973f4);font-weight:950;font-size:23px;box-shadow:0 8px 22px rgba(57,115,244,.3);border:1px solid rgba(255,255,255,.18)}
+.top-stats{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.top-stats>span,.icon-btn,.profile-chip{background:#fff;color:#101828;border:0;border-radius:999px;padding:8px 11px;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.08)}.icon-btn{min-width:40px}.profile-chip{display:flex;align-items:center;gap:7px;font-weight:800}
+.app-main{margin-top:18px}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#98a2b3;font-size:12px;padding:20px 4px 8px;line-height:1.5}
+.hero{position:relative;background:radial-gradient(circle at 86% 12%,rgba(54,191,250,.18),transparent 24%),radial-gradient(circle at 92% 50%,rgba(122,90,248,.28),transparent 30%),radial-gradient(circle at 7% 100%,rgba(18,183,106,.22),transparent 30%),linear-gradient(135deg,#172342,#10182f);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:38px;box-shadow:var(--shadow);overflow:hidden}.hero:after{content:"";position:absolute;right:-40px;bottom:-76px;width:310px;height:310px;border:56px solid rgba(255,255,255,.035);border-radius:50%}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:12px;color:#b8c0d9;font-weight:850}.hero h1{font-size:clamp(38px,7vw,70px);line-height:.94;margin:10px 0 14px;letter-spacing:-.05em;max-width:770px}.hero p{max-width:720px;color:#d0d5dd;font-size:18px;line-height:1.55}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.hero-orbit{min-height:280px;display:grid;place-items:center;position:relative}.planet{width:220px;height:220px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 38% 30%,#fff 0 3%,#79d9ff 4%,#3973f4 28%,#3b2a7a 68%,#141b39 100%);box-shadow:0 0 0 18px rgba(255,255,255,.025),0 28px 70px rgba(3,8,20,.35);font-size:76px}.orbit-chip{position:absolute;background:#fff;color:#101828;border-radius:999px;padding:9px 13px;font-weight:850;font-size:13px;box-shadow:var(--shadow-soft)}.orbit-chip.e{top:22px;left:8px}.orbit-chip.m{right:0;top:92px}.orbit-chip.s{bottom:20px;left:18px}
+.btn{border:0;border-radius:14px;padding:13px 17px;font-weight:850;min-height:46px;transition:transform .16s ease,box-shadow .16s ease}.btn:hover{transform:translateY(-1px)}.btn-primary{background:#fff;color:#101828}.btn-secondary{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.15)}.btn-dark{background:#101828;color:#fff}.btn-accent{background:#6941c6;color:#fff}.btn-success{background:#039855;color:#fff}.btn-ghost{background:#f2f4f7;color:#344054}.btn:disabled{cursor:not-allowed;opacity:.55;transform:none}
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.stat-card{background:#fff;color:#101828;border-radius:18px;padding:16px;box-shadow:var(--shadow-soft)}.stat-card small{color:#667085}.stat-card strong{display:block;font-size:25px;margin-top:4px}.stat-card .trend{font-size:12px;color:#667085;margin-top:4px}
+.section-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;margin:28px 2px 12px}.section-head h2{margin:0;font-size:25px}.section-head p{margin:4px 0 0;color:#b8c0d9}.world-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.world-card{border:0;text-align:left;border-radius:25px;padding:22px;color:#fff;min-height:238px;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:.18s transform,.18s box-shadow}.world-card:hover{transform:translateY(-4px);box-shadow:0 24px 66px rgba(3,8,20,.28)}.world-card:after{content:"";position:absolute;width:150px;height:150px;border:24px solid rgba(255,255,255,.08);border-radius:50%;right:-46px;top:-44px}.world-card .world-icon{font-size:44px}.world-card h3{font-size:26px;margin:12px 0 6px}.world-card p{color:rgba(255,255,255,.82);line-height:1.48;max-width:90%}.world-card .progress-mini{margin-top:18px}.english{background:linear-gradient(145deg,#6941c6,#8a67ff)}.maths{background:linear-gradient(145deg,#175cd3,#3f83ff)}.science{background:linear-gradient(145deg,#027a48,#12b76a)}
+.progress{height:9px;background:rgba(255,255,255,.22);border-radius:999px;overflow:hidden}.progress>i{display:block;height:100%;background:#fff;border-radius:999px}.progress-label{display:flex;justify-content:space-between;font-size:12px;margin-top:7px;color:rgba(255,255,255,.88)}
+.panel{background:#fff;color:#101828;border-radius:24px;padding:22px;box-shadow:var(--shadow)}.panel h2,.panel h3{margin-top:0}.muted{color:#667085}.grid-2{display:grid;grid-template-columns:1.45fr .75fr;gap:16px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:7px 10px;background:#f2f4f7;color:#344054;font-size:12px;font-weight:750}
+.map{display:grid;gap:10px}.mission{border:1px solid #eaecf0;background:#fff;border-radius:18px;padding:14px 15px;display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:center;text-align:left;color:#101828;transition:.18s}.mission:hover{border-color:#98a2b3;transform:translateY(-1px);box-shadow:0 8px 22px rgba(16,24,40,.07)}.mission.active{outline:3px solid rgba(122,90,248,.13);border-color:#7a5af8}.mission.done .mission-num{background:#ecfdf3;color:#027a48}.mission-num{width:46px;height:46px;border-radius:14px;background:#f2f4f7;display:grid;place-items:center;font-weight:900}.mission-title{font-weight:850}.mission-sub{font-size:12px;color:#667085;margin-top:3px}.mission-star{font-size:20px}.mission-progress{font-size:11px;color:#667085;margin-top:5px}
+.topic-chips{display:flex;gap:7px;flex-wrap:wrap}.topic-chip{background:#f2f4f7;border:1px solid #eaecf0;padding:7px 10px;border-radius:999px;font-size:12px;color:#344054}.lesson-box{border:1px solid #eaecf0;border-radius:17px;padding:16px;margin-top:12px;background:linear-gradient(180deg,#fff,#fcfcfd)}.lesson-box h4{margin:0 0 7px}.lesson-box p{margin:0;line-height:1.62;color:#475467}.lesson-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.learn-step{border:1px solid #eaecf0;border-radius:16px;padding:14px;background:#f9fafb}.learn-step b{display:block;margin-bottom:5px}.learn-step span{font-size:12px;color:#667085;line-height:1.45}
+.challenge-shell{max-width:780px;margin:0 auto}.quiz-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:14px}.question{font-size:27px;line-height:1.25;margin:8px 0 18px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{border:1px solid #d0d5dd;background:#fff;border-radius:16px;padding:14px;text-align:left;min-height:60px;color:#101828;font-weight:750;transition:.16s}.answer:hover{border-color:#98a2b3;background:#fcfcfd}.answer.correct{background:#ecfdf3;border-color:#12b76a}.answer.wrong{background:#fef3f2;border-color:#f04438}.feedback{margin-top:14px;border-radius:16px;padding:14px;background:#f8fafc;border:1px solid #eaecf0;line-height:1.58}.power-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.power{border:1px solid #d0d5dd;background:#f9fafb;color:#344054;border-radius:13px;padding:10px 12px;font-weight:800}.power small{font-weight:600;color:#667085}.quiz-progress{height:8px;background:#eaecf0;border-radius:999px;overflow:hidden;margin-bottom:16px}.quiz-progress i{height:100%;display:block;background:linear-gradient(90deg,#7a5af8,#3973f4);border-radius:999px}
+.badge-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.badge{border:1px solid #eaecf0;border-radius:16px;padding:14px;background:#fff}.badge.unlocked{background:#fffaeb;border-color:#fec84b}.badge strong{display:block;margin-bottom:3px}.teacher-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #f2f4f7}.teacher-row:last-child{border-bottom:0}
+.quest-banner{margin-top:16px;border-radius:22px;padding:18px;background:linear-gradient(135deg,#fff6ed,#fffaf5);border:1px solid #fedf89;color:#7a2e0e;display:flex;justify-content:space-between;gap:16px;align-items:center}.quest-banner strong{display:block;font-size:17px}.quest-banner p{margin:4px 0 0;font-size:13px;color:#934a1b}.quest-icon{font-size:38px}.profile-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.avatar-btn{border:1px solid #d0d5dd;background:#fff;border-radius:15px;min-height:64px;font-size:28px}.avatar-btn.active{border-color:#7a5af8;box-shadow:0 0 0 3px rgba(122,90,248,.12)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(11,16,32,.76);display:grid;place-items:center;padding:18px;z-index:100}.modal{width:min(580px,100%);background:#fff;color:#101828;border-radius:24px;padding:22px;box-shadow:0 22px 90px rgba(0,0,0,.38)}.modal h2{margin-top:0}.close-x{float:right;border:0;background:#f2f4f7;border-radius:10px;width:38px;height:38px}.form-row{display:grid;gap:7px;margin-top:14px}.form-row label{font-size:13px;font-weight:800}.form-row input{border:1px solid #d0d5dd;border-radius:12px;padding:12px;min-height:46px;font-size:16px}
+.confetti{position:fixed;top:-12px;width:9px;height:14px;z-index:120;pointer-events:none;animation:fall 1.6s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.9}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-orbit{display:none}.world-grid,.stats-strip{grid-template-columns:1fr 1fr}.grid-2{grid-template-columns:1fr}.topbar{position:static}.answers{grid-template-columns:1fr}.lesson-steps{grid-template-columns:1fr}}
+@media(max-width:620px){.app-shell{padding:10px}.hero{padding:25px 18px}.world-grid,.stats-strip{grid-template-columns:1fr}.brand small{display:none}.profile-chip span:last-child{display:none}.top-stats>span{padding:7px 8px}.question{font-size:22px}.mission{grid-template-columns:42px 1fr}.mission-star{display:none}.footer{display:block}.footer span{display:block;margin-top:6px}.hero h1{font-size:43px}.quest-banner{align-items:flex-start}.profile-grid{grid-template-columns:repeat(5,1fr)}}
+
+/* Public release dashboard shell */
+.site-shell{max-width:1536px;margin:0 auto;display:grid;grid-template-columns:205px minmax(0,1fr);min-height:100vh}.side-nav{position:sticky;top:0;height:100vh;padding:18px 12px;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(6,20,49,.98),rgba(8,21,50,.94));border-right:1px solid rgba(255,255,255,.08);z-index:40}.side-brand{border:0;background:transparent;color:#fff;display:flex;align-items:center;gap:10px;padding:4px 5px 18px;text-align:left}.side-brand .brand-mark{width:42px;height:42px;flex:0 0 42px}.side-brand-copy strong{display:block;font-size:15px}.side-brand-copy small{display:block;color:#a8b6d6;font-size:10px;margin-top:3px}.side-links{display:grid;gap:5px}.side-link{border:0;color:#c8d7f5;background:transparent;border-radius:12px;min-height:46px;padding:8px 10px;display:grid;grid-template-columns:28px 1fr;align-items:center;text-align:left;gap:8px}.side-link span{font-size:19px;text-align:center}.side-link b{font-size:13px}.side-link:hover,.side-link.active{background:linear-gradient(90deg,rgba(50,112,229,.9),rgba(67,105,197,.68));color:#fff;box-shadow:inset 3px 0 0 #ffd058}.side-quote{margin-top:auto;padding:14px 10px;color:#aebddd;font-size:12px;line-height:1.5;text-align:center;font-style:italic}.content-shell{min-width:0;padding:0 18px 18px}.topbar{border-radius:0 0 18px 18px;top:0;margin:0 -18px;padding:11px 18px;background:rgba(7,20,45,.9);border-color:rgba(255,255,255,.08)}.search-shell{display:flex;align-items:center;gap:9px;flex:1;max-width:435px;background:#0d2448;border:1px solid rgba(152,183,235,.26);border-radius:999px;padding:8px 14px;color:#aebddd}.search-shell input{width:100%;border:0;outline:0;background:transparent;color:#fff;font-size:13px}.search-shell input::placeholder{color:#91a3c7}.top-stats>span,.icon-btn,.profile-chip{background:rgba(255,255,255,.075);color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:none}.top-stats small{color:#9fb2d4}.level-chip{display:flex;gap:4px;align-items:center}.app-main{margin-top:12px}.footer{padding:18px 3px 5px}
+
+.hero-premium{min-height:238px;padding:0;background:linear-gradient(90deg,rgba(8,27,61,.98) 0%,rgba(20,67,131,.84) 48%,rgba(17,61,112,.7) 100%),radial-gradient(circle at 76% 28%,rgba(255,189,46,.24),transparent 23%),linear-gradient(135deg,#1a477b,#152e61);border-radius:23px}.hero-premium-inner{padding:30px 34px;max-width:800px;position:relative;z-index:2}.hero-premium h1{font-size:clamp(38px,5.2vw,64px);line-height:.98;letter-spacing:-.035em;margin:7px 0 5px;text-shadow:0 4px 18px rgba(0,0,0,.32)}.hero-premium h1 span{color:#ffbf38}.hero-tagline{font-weight:900;letter-spacing:.12em;color:#eef5ff!important;font-size:15px!important}.feature-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}.feature-pills span{background:rgba(8,30,67,.72);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 12px;font-size:12px;color:#eef5ff;backdrop-filter:blur(8px)}.hero-castle{position:absolute;right:18px;top:0;width:310px;height:100%;display:grid;place-items:center;overflow:hidden}.castle-icon{font-size:108px;filter:drop-shadow(0 20px 18px rgba(0,0,0,.28));transform:translate(22px,20px)}.castle-moon{position:absolute;right:78px;top:20px;font-size:52px;color:#ffe391;text-shadow:0 0 28px rgba(255,219,105,.65)}.hero-scroll{position:absolute;right:4px;top:23px;background:#f5d59d;color:#543512;border:1px solid #c99b55;border-radius:8px;padding:11px 9px;font-family:Georgia,serif;font-weight:900;font-size:11px;line-height:1.35;transform:rotate(3deg);box-shadow:0 10px 20px rgba(0,0,0,.22)}
+
+.home-dashboard{display:grid;grid-template-columns:minmax(0,1fr) 225px;gap:14px;margin-top:14px}.section-head.compact{margin:0 2px 10px}.section-head.compact h2{font-size:21px}.section-head.compact p{color:#aebddd;font-size:13px}.premium-world-grid{gap:12px}.premium-world{padding:0!important;min-height:510px!important;background:#0b234d!important;border:1px solid rgba(160,190,245,.28)!important;display:flex;flex-direction:column}.premium-world:after{display:none}.world-scene{height:198px;background-size:cover;background-position:center;position:relative}.world-scene:after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#0b234d)}.premium-world.english .world-scene:after{background:linear-gradient(transparent,#3a1242)}.premium-world.science .world-scene:after{background:linear-gradient(transparent,#063828)}.section-count{position:absolute;right:10px;top:10px;z-index:2;background:rgba(8,20,50,.72);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 9px;font-size:10px;font-weight:900}.world-content{position:relative;z-index:2;margin-top:-12px;padding:8px 18px 17px;display:flex;flex:1;flex-direction:column}.premium-world.english .world-content{background:linear-gradient(180deg,rgba(57,15,67,.2),rgba(57,15,67,.94))}.premium-world.maths .world-content{background:linear-gradient(180deg,rgba(8,42,88,.15),rgba(7,46,101,.96))}.premium-world.science .world-content{background:linear-gradient(180deg,rgba(3,55,37,.18),rgba(3,60,43,.96))}.world-title-row{display:flex;align-items:center;gap:10px}.premium-world .world-icon{font-size:30px}.premium-world h3{font-family:Georgia,serif;font-size:25px;margin:0}.premium-world p{font-size:13px;margin:2px 0;color:#e3ecff;max-width:none}.premium-world ul{list-style:none;margin:13px 0 12px;padding:0;display:grid;gap:8px}.premium-world li{font-size:12px;color:#e2ebfb;display:flex;gap:7px}.premium-world li:before{content:"◆";color:#ffd058;font-size:8px;margin-top:3px}.premium-world .progress-mini{margin-top:auto}.premium-world .explore-cta{display:block;text-align:center;margin-top:11px;border-radius:10px;background:linear-gradient(180deg,rgba(91,164,255,.98),rgba(31,117,237,.98));padding:10px 8px;font-size:13px;font-weight:900}.premium-world.english .explore-cta{background:linear-gradient(180deg,#ff55b3,#d91d83)}.premium-world.science .explore-cta{background:linear-gradient(180deg,#37db70,#09a53d)}
+
+.journey-card{border:1px solid rgba(144,183,242,.38);border-radius:18px;background:linear-gradient(180deg,#0c2854,#091f45);padding:15px;color:#fff;box-shadow:var(--shadow)}.journey-card h3{margin:0 0 11px}.journey-ring{width:135px;height:135px;margin:0 auto 15px;border-radius:50%;background:conic-gradient(#4fe27b var(--progress),#23466f 0);display:grid;place-items:center;position:relative}.journey-ring:after{content:"";position:absolute;inset:12px;border-radius:50%;background:#0b264e}.journey-ring>div{position:relative;z-index:2;text-align:center}.journey-ring strong{display:block;font-size:28px}.journey-ring span{display:block;font-size:10px;color:#c5d5ee}.journey-row{margin:11px 0}.journey-row>div:first-child{display:flex;justify-content:space-between;font-size:11px}.journey-track{height:8px;background:#24446a;border-radius:999px;overflow:hidden;margin-top:5px}.journey-track i{display:block;height:100%;border-radius:999px}.journey-track i.english{background:#f14ca5}.journey-track i.maths{background:#37b7ff}.journey-track i.science{background:#42dd75}.latest-achievement{border-top:1px solid rgba(255,255,255,.1);margin-top:15px;padding-top:13px}.latest-achievement small{display:block;color:#9eb3d5}.latest-achievement strong{display:block;margin-top:4px;font-size:12px}.journey-btn{width:100%;margin-top:11px;padding:9px 12px;min-height:40px}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}.quick-card{border:1px solid rgba(147,180,231,.26);background:linear-gradient(145deg,#10284c,#0a1f40);border-radius:17px;color:#fff;min-height:102px;padding:13px;text-align:left;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:10px}.quick-card:hover{border-color:#6ca9ff;transform:translateY(-1px)}.quick-card .quick-icon{width:46px;height:46px;border-radius:50%;background:#173765;display:grid;place-items:center;font-size:25px}.quick-card strong,.quick-card small{display:block}.quick-card small{color:#aebddd;margin-top:4px;font-size:11px;line-height:1.35}.quick-card>b{font-size:22px;color:#9fc8ff}
+
+.feature-view{min-height:520px}.challenge-choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}.challenge-choice{border:1px solid #e2e7ef;background:linear-gradient(180deg,#fff,#f8faff);border-radius:20px;padding:22px;text-align:left;color:#101828;min-height:150px}.challenge-choice:hover{border-color:#7a9ff0;box-shadow:var(--shadow-soft)}.challenge-choice>span{font-size:36px;display:block}.challenge-choice strong,.challenge-choice small{display:block}.challenge-choice strong{font-size:17px;margin-top:10px}.challenge-choice small{color:#667085;margin-top:5px}.achievement-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.achievement-card{border:1px solid #e4e7ec;border-radius:18px;background:#f8fafc;padding:18px;display:flex;min-height:165px;flex-direction:column}.achievement-card>span{font-size:34px;filter:grayscale(1);opacity:.55}.achievement-card strong{margin-top:12px}.achievement-card small{color:#667085;line-height:1.4;margin-top:4px}.achievement-card b{margin-top:auto;color:#98a2b3;font-size:11px}.achievement-card.unlocked{background:linear-gradient(180deg,#fff9e8,#fff);border-color:#f2c34b}.achievement-card.unlocked>span{filter:none;opacity:1}.achievement-card.unlocked b{color:#b37800}.settings-list{display:grid;gap:8px;margin-top:20px}.setting-row{border:1px solid #eaecf0;background:#fff;border-radius:15px;padding:14px;text-align:left;display:flex;justify-content:space-between;gap:16px;color:#101828}.setting-row strong,.setting-row small{display:block}.setting-row small{color:#667085;margin-top:4px}.setting-row.danger strong{color:#b42318}.search-results{display:grid;gap:8px}.search-result{border:1px solid #eaecf0;background:#fff;border-radius:15px;padding:13px;color:#101828;display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:center;text-align:left}.search-result:hover{border-color:#84a8f0}.search-result>span:first-child{font-size:24px}.search-result strong,.search-result small{display:block}.search-result small{color:#667085;margin-top:3px}
+
+@media(max-width:1180px){.site-shell{grid-template-columns:175px minmax(0,1fr)}.side-link b{font-size:12px}.home-dashboard{grid-template-columns:1fr}.journey-card{display:grid;grid-template-columns:150px repeat(3,1fr);gap:10px;align-items:center}.journey-card h3,.latest-achievement,.journey-btn{display:none}.journey-ring{margin:0}.quick-grid{grid-template-columns:1fr 1fr}.premium-world{min-height:500px!important}}
+@media(max-width:900px){.site-shell{display:block}.content-shell{padding:0 10px 84px}.side-nav{position:fixed;z-index:80;left:8px;right:8px;bottom:7px;top:auto;height:auto;padding:7px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(5,17,39,.96);backdrop-filter:blur(18px)}.side-brand,.side-quote{display:none}.side-links{display:flex;overflow-x:auto;gap:5px}.side-link{min-width:54px;display:flex;flex-direction:column;gap:2px;justify-content:center;padding:6px 8px;min-height:52px}.side-link b{font-size:9px;white-space:nowrap}.side-link span{font-size:18px}.topbar{margin:0 -10px;padding:9px 10px}.search-shell{max-width:none}.top-stats>span:nth-of-type(2),.level-chip{display:none}.premium-world-grid{grid-template-columns:1fr}.premium-world{min-height:auto!important}.world-scene{height:210px}.home-dashboard{display:block}.journey-card{display:none}.hero-castle{opacity:.42}.hero-premium-inner{padding-right:22px}.quick-grid{grid-template-columns:1fr 1fr}.achievement-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.content-shell{padding-left:7px;padding-right:7px}.topbar{margin:0 -7px}.search-shell{display:none}.profile-chip span:last-child{display:none}.hero-premium{min-height:300px}.hero-premium-inner{padding:24px 19px}.hero-premium h1{font-size:42px;max-width:330px}.hero-castle{right:-70px;opacity:.27}.feature-pills span:nth-child(n+3){display:none}.quick-grid,.challenge-choice-grid,.achievement-grid{grid-template-columns:1fr}.side-link:nth-child(7),.side-link:nth-child(9){display:none}.premium-world ul{grid-template-columns:1fr}.top-stats{gap:4px}.top-stats>span{font-size:11px;padding:7px}.icon-btn{display:none}.world-scene{height:185px}}
+
+.footer-links{display:flex;gap:12px;flex-wrap:wrap}.footer a{color:#cbd5e1;text-decoration:none}.footer a:hover,.footer a:focus{text-decoration:underline;color:#fff}.legal-shell{max-width:880px;margin:0 auto;padding:34px 18px 60px;color:#101828}.legal-card{background:#fff;border-radius:24px;padding:28px;box-shadow:var(--shadow)}.legal-card h1{margin-top:0;font-size:36px}.legal-card h2{margin-top:28px}.legal-card p,.legal-card li{line-height:1.7;color:#475467}.legal-card a{color:#175cd3}.legal-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.legal-brand{color:#fff;text-decoration:none;font-weight:900}.legal-back{display:inline-flex;align-items:center;min-height:44px;padding:10px 14px;border-radius:12px;background:#fff;color:#101828;text-decoration:none;font-weight:800}.legal-note{padding:14px 16px;border:1px solid #d0d5dd;border-radius:14px;background:#f8fafc}.public-badge{display:inline-flex;align-items:center;gap:7px;background:#ecfdf3;color:#027a48;border:1px solid #abefc6;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}
+
+.world-scene{overflow:hidden}.world-scene.english-scene{background:radial-gradient(circle at 24% 35%,rgba(255,103,181,.55),transparent 22%),radial-gradient(circle at 78% 28%,rgba(167,139,250,.42),transparent 25%),linear-gradient(145deg,#3b164d,#7c2f75 55%,#31224f)}.world-scene.maths-scene{background:radial-gradient(circle at 25% 25%,rgba(92,200,255,.45),transparent 22%),radial-gradient(circle at 78% 70%,rgba(57,115,244,.38),transparent 28%),linear-gradient(145deg,#0a2e66,#114d91 55%,#122d62)}.world-scene.science-scene{background:radial-gradient(circle at 22% 30%,rgba(77,226,123,.42),transparent 24%),radial-gradient(circle at 76% 68%,rgba(54,191,250,.25),transparent 28%),linear-gradient(145deg,#083d2f,#0b6b4a 55%,#123d35)}.scene-symbol{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:72px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.28));z-index:2}.scene-orb{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);backdrop-filter:blur(3px)}.scene-a{width:110px;height:110px;left:-26px;bottom:-20px}.scene-b{width:74px;height:74px;right:20px;top:24px}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#app">Skip to game</a>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+
+  <div class="site-shell">
+    <aside class="side-nav" aria-label="Main navigation">
+      <button id="brandBtn" class="side-brand" aria-label="Go to home">
+        <span class="brand-mark" aria-hidden="true">📖</span>
+        <span class="side-brand-copy"><strong>Knowledge Quest</strong><small>Learn • Explore • Achieve</small></span>
+      </button>
+
+      <nav class="side-links">
+        <button id="navHome" class="side-link active"><span>⌂</span><b>Home</b></button>
+        <button id="navProgress" class="side-link"><span>▥</span><b>My Progress</b></button>
+        <button id="navEnglish" class="side-link"><span>📚</span><b>English World</b></button>
+        <button id="navMaths" class="side-link"><span>π</span><b>Maths World</b></button>
+        <button id="navScience" class="side-link"><span>⚗</span><b>Science World</b></button>
+        <button id="navChallenges" class="side-link"><span>🎯</span><b>Challenges</b></button>
+        <button id="navAchievements" class="side-link"><span>🏅</span><b>Achievements</b></button>
+        <button id="navProfile" class="side-link"><span>🦉</span><b>Pets & Avatar</b></button>
+        <button id="navLeaderboard" class="side-link"><span>▥</span><b>Personal Bests</b></button>
+        <button id="navSettings" class="side-link"><span>⚙</span><b>Settings</b></button>
+      </nav>
+
+      <div class="side-quote">“Small steps lead to big results.”</div>
+    </aside>
+
+    <div class="content-shell">
+      <header class="topbar">
+        <div class="search-shell" aria-label="Search learning topics">
+          <span aria-hidden="true">⌕</span>
+          <input id="globalSearch" type="search" placeholder="Search topics, skills or keywords…" autocomplete="off" />
+        </div>
+        <div class="top-stats" aria-label="Player progress">
+          <span title="Knowledge experience">⭐ <strong id="xpTop">0</strong> <small>XP</small></span>
+          <span title="Quest coins">🪙 <strong id="coinsTop">20</strong></span>
+          <span class="level-chip"><small>Level</small> <strong id="levelTop">1</strong></span>
+          <button id="profileBtn" class="profile-chip" aria-label="Player profile"><span id="avatarTop">🦉</span><span id="playerTop">Explorer</span></button>
+          <button id="installBtn" class="icon-btn hidden" aria-label="Install app" title="Install app">⬇️</button>
+          <button id="soundBtn" class="icon-btn" aria-label="Toggle game sound" title="Sound">🔊</button>
+        </div>
+      </header>
+
+      <main id="app" class="app-main" aria-live="polite"></main>
+
+      <footer class="footer">
+        <span>Year 5 Knowledge Quest • English, Maths and Science learning for UK Key Stage 2.</span>
+        <span class="footer-links"><a href="#">About</a><a href="#">Parents &amp; Teachers</a><a href="#">Privacy</a><a href="#">Terms</a></span>
+        <span>Progress stays on this device. No account is required.</span>
+      </footer>
+    </div>
+  </div>
+
+  <script>window.Y5Q_CONTENT = {
+  english: {
+    label: 'English World', icon: '📚', theme: 'english',
+    sections: [
+      { title:'Kinds of Word', lesson:'Learn how different words do different jobs in sentences. The section builds recognition of nouns, pronouns, articles, adjectives, verbs, adverbs and prepositions.', topics:['Nouns','Pronouns','Articles','Adjectives','Verbs','Adverbs','Prepositions'], explain:'Create one sentence and identify at least three different word classes in it.' },
+      { title:'Punctuation', lesson:'Use punctuation to make meaning clear: sentence endings, possession, missing letters, commas, extra information, direct speech, colons and semi-colons.', topics:['Sentence Punctuation','Showing Who Owns What','Showing Missing Letters with an Apostrophe',"It's and Its",'Commas — Lists and Long Sentences','Adding Extra Information','Inverted Commas','Colons and Semi-Colons'], explain:'Take a sentence without punctuation and explain what you would add and why.' },
+      { title:'Writing Proper Sentences', lesson:'Build complete, accurate sentences using verbs, active and passive forms, comparisons, clauses and conjunctions.', topics:['Using Verbs in Sentences','Active and Passive Verbs','Comparing Things Properly','Clauses','Conjunctions'], explain:'Turn a simple sentence into a longer one by adding another clause.' },
+      { title:'How to Use Paragraphs', lesson:'Organise related sentences into paragraphs. New events, speakers, people, places or times can signal a new paragraph.', topics:['Paragraphs Make Things Clear','When to Start a New Paragraph','New People and People Speaking','When the Place or Time Changes'], explain:'Explain why a new speaker in dialogue normally starts a new paragraph.' },
+      { title:'Planning and Writing', lesson:'Plan before writing by identifying audience and purpose, developing ideas, drafting and improving the final piece.', topics:['How to Plan','Identifying Audience and Purpose','How to Develop Your Writing','Drafting and Improving Your Writing'], explain:'Explain how writing for a headteacher differs from writing to a close friend.' },
+      { title:'Writing Stories', lesson:'Create stronger stories with effective openings, viewpoint, description, imagery, speech and varied vocabulary.', topics:['How to Start Your Story',"Who's Telling the Story",'Describing Things Well','Three Types of Image','Writing Speech','Using Varied Words'], explain:'Invent a character and explain how their speech could reveal their personality.' },
+      { title:'Other Types of Writing', lesson:'Match writing style to purpose. Formal letters, informal letters and leaflets use different language and presentation choices.', topics:['Writing a Formal Letter','Using Formal Language','Writing an Informal Letter','Using Chatty Language','Writing Leaflets','Making Leaflets Persuasive'], explain:'Give one clear difference between formal and informal writing.' },
+      { title:'Reading', lesson:'Read questions carefully, return to the text, find evidence and use clues to work out answers that are not stated directly.', topics:['Doing Reading Questions','Reading the Text','Working Out the Answers','How to Give a Good Answer','Questions that Ask What You Think','Reading Test — Story','Questions on the Story','More Questions on the Story','Reading Test — Poem','Questions on the Poem','Reading Test — Descriptions','Questions on Short Descriptions','Tricky Questions','More Tricky Questions'], explain:'Explain the difference between finding a fact and inferring an answer from clues.' },
+      { title:'Confusing Words', lesson:'Choose accurately between words that sound or look similar by thinking about their meaning and grammatical job.', topics:['Practice / Practise and Advice / Advise','Affect / Effect and Passed / Past','To / Too / Two','Of / Off','Did / Done and Saw / Seen'], explain:'Use to, too and two correctly in one sentence.' },
+      { title:'Handwriting and Spelling', lesson:'Improve written accuracy through handwriting, spelling rules, plural forms, prefixes, suffixes and vocabulary relationships.', topics:['Improving Handwriting','Spelling Rules',"When There's More Than One",'Prefixes and Suffixes','Synonyms and Antonyms','Difficult and Tricky Words'], explain:'Choose a word with a prefix or suffix and explain what that part adds to the meaning.' }
+    ],
+    questions: [
+      {section:0,q:'Which word is the noun in “The enormous tiger moved quietly”?',a:['enormous','tiger','moved','quietly'],c:1,h:'Look for the word that names a thing or creature.',e:'“Tiger” names an animal, so it is the noun.'},
+      {section:0,q:'Which word is the adverb in “Aisha answered politely”?',a:['Aisha','answered','politely','none'],c:2,h:'Find the word that tells us how the action happened.',e:'“Politely” tells us how Aisha answered.'},
+      {section:1,q:'Which sentence is punctuated correctly as a question?',a:['Where are you going.','Where are you going?','where are you going?','Where are you going!'],c:1,h:'Check both the capital letter and the final punctuation mark.',e:'A question begins with a capital letter and ends with a question mark.'},
+      {section:1,q:'Which sentence uses direct speech?',a:['Mia said that she was tired.','Leo said, “I am ready.”','Ben wondered whether it was raining.','The teacher explained the task.'],c:1,h:'Direct speech gives the exact words spoken.',e:'“I am ready” gives Leo’s exact words, so it is direct speech.'},
+      {section:2,q:'In “The ball was kicked by Sam”, which voice is used?',a:['active','passive','imperative','question'],c:1,h:'Think about whether the subject performs the action or receives it.',e:'The ball receives the action, so the sentence is passive.'},
+      {section:2,q:'Which word is a conjunction in “I wanted to play, but it began to rain”?',a:['wanted','play','but','rain'],c:2,h:'Find the word joining two ideas.',e:'“But” joins two contrasting clauses.'},
+      {section:3,q:'Which change normally needs a new paragraph in dialogue?',a:['A new person speaks','A noun appears','A sentence is short','A word is repeated'],c:0,h:'Think about helping the reader follow who is talking.',e:'A new speaker normally begins a new paragraph.'},
+      {section:4,q:'What should a writer identify before choosing language and style?',a:['Audience and purpose','Only the title','Paper colour','Number of commas'],c:0,h:'Think about who will read the writing and why it is being written.',e:'Audience and purpose guide tone, content and level of formality.'},
+      {section:5,q:'Which feature can reveal what a story character is like?',a:['How the character speaks','Only the page number','The margin width','The font size'],c:0,h:'Think about dialogue.',e:'A character’s words and manner of speaking can reveal personality.'},
+      {section:6,q:'Which opening best suits a formal letter when the recipient’s name is unknown?',a:['Hey mate!','Dear Sir or Madam,','Yo!','Hiya!'],c:1,h:'Choose the least casual greeting.',e:'“Dear Sir or Madam,” is an appropriate formal opening.'},
+      {section:7,q:'Working out an answer from clues in a text is called what?',a:['Inference','Alphabetising','Copying','Handwriting'],c:0,h:'The answer is not stated directly.',e:'Inference means using clues and evidence to work something out.'},
+      {section:8,q:'Choose the correct word: “I have ___ books on my desk.”',a:['to','too','two','off'],c:2,h:'The sentence needs a number.',e:'“Two” is the number 2.'},
+      {section:8,q:'Choose the correct word: “The loud music did not ___ my concentration.”',a:['affect','effect','past','passed'],c:0,h:'The missing word is the action of influencing something.',e:'“Affect” is used for the influencing action.'},
+      {section:9,q:'Which pair are antonyms?',a:['large and huge','happy and joyful','hot and cold','quick and fast'],c:2,h:'Antonyms have opposite meanings.',e:'“Hot” and “cold” are opposites.'}
+    ]
+  },
+
+  maths: {
+    label:'Maths World', icon:'🔢', theme:'maths',
+    sections:[
+      {title:'Number and Place Value',lesson:'Develop place value with larger numbers, ordering, negative numbers, Roman numerals, decimals and rounding.',topics:['Number Stuff','Ordering Numbers','Negative Numbers','Roman Numerals','Decimals','Rounding','Practice Questions'],explain:'Choose a six-digit number and explain the value of each digit.'},
+      {title:'Calculations',lesson:'Use written and mental methods for addition, subtraction, multiplication and division, then extend to powers of ten, money, estimation and number properties.',topics:['Written Adding and Subtracting','Multiplication','Written Multiplication','Division','Written Division','Multiplying by 10, 100 and 1000','Dividing by 10, 100 and 1000','Mental Maths','Order of Operations','Typical Questions','Calculations with Money','Estimation and Accuracy','Multiples','Factors','Prime Numbers','Prime Factors','Square and Cube Numbers','Calculators','Practice Questions'],explain:'Explain the difference between a factor and a multiple.'},
+      {title:'Fractions, Decimals and Percentages',lesson:'Work with fractions and their equivalent forms, compare and calculate with fractions, and connect fractions to decimals and percentages.',topics:['Fractions','Equivalent Fractions','Mixed Numbers and Improper Fractions','Comparing Fractions','Multiplying Fractions','Adding and Subtracting Fractions','Dividing Fractions','Equivalent Fractions and Decimals','Division and Fractions','Percentages','Practice Questions'],explain:'Explain why 1/2, 0.5 and 50% represent the same amount.'},
+      {title:'Ratio, Proportion and Algebra',lesson:'Study relationships between quantities, percentage problems, similar shapes, symbols, formulae, missing numbers and sequences.',topics:['Ratio and Proportion','Percentage Problems','Similar Shapes','Using Symbols and Letters','Formulae and Expressions','Using Formulae','Finding Missing Numbers','Number Sequences','Practice Questions'],explain:'Give a number sequence and describe its rule.'},
+      {title:'Measure',lesson:'Use time and measurement units, convert between units and solve problems involving perimeter, area and volume.',topics:['Time','Units','Conversions','Unit Conversions','Perimeters','Areas','Volume','Practice Questions'],explain:'Explain the difference between perimeter and area.'},
+      {title:'Geometry',lesson:'Investigate angles, 2D and 3D shapes, nets, symmetry, coordinates, reflection and translation.',topics:['Angles','Angle Rules','2D Shapes','3D Shapes You Need to Know','Shape Nets','Symmetry','Coordinates','Using Coordinates','Reflection and Translation','Translation','Practice Questions'],explain:'Describe one difference between reflection and translation.'},
+      {title:'Statistics',lesson:'Read, present and interpret information using tables, timetables, charts and graphs, and calculate the mean.',topics:['Tables','Timetables','Bar Charts','Pictograms','Line Graphs','Pie Charts','The Mean','Practice Questions','Words You Need to Know'],explain:'Explain how to calculate the mean of four values.'}
+    ],
+    questions:[
+      {section:0,q:'What is the value of the digit 6 in 364,219?',a:['6','600','6,000','60,000'],c:3,h:'Count the place values from the right.',e:'The 6 is in the ten-thousands place, so its value is 60,000.'},
+      {section:0,q:'Round 4,738 to the nearest hundred.',a:['4,700','4,800','4,730','5,000'],c:0,h:'Look at the tens digit.',e:'The tens digit is 3, so 4,738 rounds down to 4,700.'},
+      {section:1,q:'What is 3,487 + 2,156?',a:['5,543','5,643','5,653','5,743'],c:1,h:'Add each place value carefully.',e:'3,487 + 2,156 = 5,643.'},
+      {section:1,q:'Which number is a factor of 36?',a:['5','7','9','11'],c:2,h:'A factor divides 36 exactly.',e:'36 ÷ 9 = 4 exactly, so 9 is a factor.'},
+      {section:1,q:'What is 6 × 70?',a:['42','420','4,200','76'],c:1,h:'Think of 70 as 7 tens.',e:'6 × 70 = 42 tens = 420.'},
+      {section:2,q:'What is 3/5 of 25?',a:['5','10','15','20'],c:2,h:'Divide by the denominator, then multiply by the numerator.',e:'25 ÷ 5 = 5 and 5 × 3 = 15.'},
+      {section:2,q:'Which decimal is equivalent to 1/2?',a:['0.2','0.25','0.5','0.75'],c:2,h:'Think of one whole split into two equal parts.',e:'One half is 0.5.'},
+      {section:2,q:'Which fraction is equivalent to 0.7?',a:['7/10','7/100','70/1','1/7'],c:0,h:'The digit 7 is in the tenths place.',e:'0.7 means seven tenths, or 7/10.'},
+      {section:3,q:'The sequence is 4, 7, 10, 13. What comes next?',a:['14','15','16','17'],c:2,h:'Find the amount added each time.',e:'The rule is add 3, so 13 + 3 = 16.'},
+      {section:3,q:'If n = 5, what is n + 7?',a:['2','7','12','35'],c:2,h:'Replace n with 5.',e:'5 + 7 = 12.'},
+      {section:4,q:'A rectangle is 7 cm long and 4 cm wide. What is its perimeter?',a:['11 cm','18 cm','22 cm','28 cm'],c:2,h:'Add all four sides.',e:'7 + 4 + 7 + 4 = 22 cm.'},
+      {section:4,q:'How many metres are 3,500 centimetres?',a:['3.5 m','35 m','350 m','3,500 m'],c:1,h:'100 cm = 1 m.',e:'3,500 ÷ 100 = 35 m.'},
+      {section:5,q:'How many degrees are in a right angle?',a:['45°','90°','180°','360°'],c:1,h:'Think of the corner of a square.',e:'A right angle measures exactly 90°.'},
+      {section:5,q:'Which shape always has four equal sides and four right angles?',a:['rectangle','square','kite','trapezium'],c:1,h:'Both conditions must be true.',e:'A square has four equal sides and four right angles.'},
+      {section:6,q:'The values are 4, 6, 8 and 10. What is the mean?',a:['6','7','8','28'],c:1,h:'Add all values and divide by the number of values.',e:'4 + 6 + 8 + 10 = 28, and 28 ÷ 4 = 7.'}
+    ]
+  },
+
+  science: {
+    label:'Science World', icon:'🔬', theme:'science',
+    sections:[
+      {title:'Life Processes',lesson:'Identify living organisms through the life processes they carry out and distinguish living, once-living and never-living things.',topics:['Looking at Life','Dead or Alive','Summary Questions for Section One'],explain:'Choose a living thing and explain several life processes it carries out.'},
+      {title:'The Human Body',lesson:'Explore organs and their jobs, movement, circulation, breathing, teeth, the human life cycle, healthy living, microorganisms and disease.',topics:['Human Body Organs','How the Human Body Works','Skeleton','Movement','Circulation','The Lungs and Breathing','Teeth','Life Cycle of a Human','Healthy Living','Micro-organisms and Disease','Fighting Disease','Summary Questions for Section Two'],explain:'Explain how the heart, lungs and blood work together during exercise.'},
+      {title:'Green Plants',lesson:'Follow how plants feed, grow and reproduce through flowers, pollination, fertilisation, seeds and fruits.',topics:['Plants','Nutrition','Growth','Parts of a Flower','Pollination and Fertilisation','Seeds','Fruits and Seeds','Summary Questions for Section Three'],explain:'Describe the connection between flowers, pollination and seeds.'},
+      {title:'Variation and Classification',lesson:'Sort and identify living things by comparing their features, including invertebrates and plant groups, and using keys.',topics:['Sorting Living Things Out','Invertebrates','Plant Groups','Using Keys','Revision Summary for Section Four'],explain:'Explain how a branching key can help identify an unknown organism.'},
+      {title:'Living Things in Their Environment',lesson:'Study habitats, adaptation, food chains, food webs and ways the environment can be protected.',topics:['Places to Live','Adapting to Heat and Cold','Adapting to Water','Adapting to Other Habitats','Food Chains','Food Webs','Protecting the Environment','Summary Questions for Section Five','Fancy Words You Need to Know'],explain:'Describe one adaptation that helps an organism survive in its habitat.'},
+      {title:'Grouping Materials',lesson:'Compare and group materials using properties such as heat or electrical conduction, magnetism and state of matter.',topics:['Comparing Materials','Conductors and Insulators of Heat','Conductors and Insulators of Electricity','Magnetic Materials','Rocks','Soil','Solids, Liquids and Gases','Properties of Solids, Liquids and Gases','Summary Questions for Section Six'],explain:'Explain why a saucepan may use different materials for its body and handle.'},
+      {title:'Changing Materials',lesson:'Investigate mixing, reversible and irreversible changes, temperature, water and the water cycle.',topics:['Mixing Materials','Irreversible Changes','Reversible Changes','Temperature and Water','The Water Cycle','Summary Questions for Section Seven'],explain:'Give one reversible change and explain how it can be reversed.'},
+      {title:'Separating Mixtures and Materials',lesson:'Choose suitable methods for separating materials in mixtures, including sieving and sorting.',topics:['Sieving Mixtures','Sorting Out a Mess','Separating Mixtures','Summary Questions for Section Eight','More Fancy Words You Need to Know'],explain:'Explain when sieving is useful and when another method would be better.'},
+      {title:'Electricity',lesson:'Explore electricity, simple electric circuits and how changing parts of a circuit can change what happens.',topics:['Electricity','Electric Circuits','Changing Circuits','Summary Questions for Section Nine'],explain:'Describe what a simple circuit needs in order to work.'},
+      {title:'Forces and Motion',lesson:'Study pushes and pulls, magnets, friction, air resistance, gravity and opposing forces.',topics:['Forces','Magnets','The Force of Friction and Air Resistance','Gravity and Opposite Forces','Summary Questions for Section Ten'],explain:'Explain why opening a parachute changes how quickly a person falls.'},
+      {title:'Light and Sound',lesson:'Learn about sources of light, seeing, shadows, mirrors, making sound and changing sound.',topics:['Sources of Light','How We See','Shadows','Mirrors','Making Sound','Changing Sound','Summary Questions for Section Eleven'],explain:'Explain why a shadow forms when an opaque object blocks light.'},
+      {title:'The Earth and Beyond',lesson:'Explore the Moon and patterns linked to a day and a year.',topics:['The Moon','All in a Day','A Year','Summary Questions for Section Twelve','Yet More Fancy Words You Need to Know'],explain:'Explain the difference between Earth rotating and Earth travelling around the Sun.'},
+      {title:'Doing an Experiment',lesson:'Plan investigations, collect results, display evidence and use the results to reach conclusions.',topics:['Investigation','Getting Your Results','Displaying Your Results','My Conclusions','Summary Questions for Section Thirteen'],explain:'Describe how to make a simple comparison into a fair test.'}
+    ],
+    questions:[
+      {section:0,q:'Which of these is a life process described for living things?',a:['movement','rusting','melting','freezing'],c:0,h:'Think about something an organism can do.',e:'Movement is one of the life processes described for living things.'},
+      {section:0,q:'Which of these was once living?',a:['wooden table','glass bottle','metal spoon','stone'],c:0,h:'Think about what the material originally came from.',e:'Wood comes from trees, so a wooden table is made from material that was once living.'},
+      {section:1,q:'Which organ pumps blood around the body?',a:['lungs','heart','stomach','kidneys'],c:1,h:'Its beating creates your pulse.',e:'The heart pumps blood around the body.'},
+      {section:1,q:'Which structure protects the brain?',a:['ribs','skull','pelvis','teeth'],c:1,h:'Think about the bones around the head.',e:'The skull protects the brain.'},
+      {section:1,q:'Which gas is taken into the body through the lungs?',a:['oxygen','carbon dioxide','helium','hydrogen'],c:0,h:'Body cells need this gas.',e:'The lungs take in oxygen.'},
+      {section:2,q:'Which process transfers pollen as part of plant reproduction?',a:['pollination','evaporation','digestion','friction'],c:0,h:'This topic appears with flower reproduction.',e:'Pollination is the transfer of pollen involved in plant reproduction.'},
+      {section:3,q:'What is the purpose of a classification key?',a:['To identify living things using features','To measure temperature','To calculate speed','To make electricity'],c:0,h:'Think about sorting organisms by observable features.',e:'A classification key helps identify organisms from their features.'},
+      {section:4,q:'What does a food chain show?',a:['A sequence of feeding relationships','The age of an animal','The temperature of a habitat','The colour of a plant'],c:0,h:'Think about who eats whom.',e:'A food chain represents feeding relationships between organisms.'},
+      {section:5,q:'Which material is usually a good electrical conductor?',a:['rubber','plastic','copper','dry wood'],c:2,h:'Electrical wires commonly contain this material.',e:'Copper is a metal commonly used as an electrical conductor.'},
+      {section:6,q:'Which change is reversible?',a:['burning paper','melting ice','cooking an egg','rusting iron'],c:1,h:'Ask whether the original material can be obtained again.',e:'Melted ice can be frozen back into solid ice.'},
+      {section:7,q:'Which method is useful for separating large solid particles from smaller ones?',a:['sieving','melting','burning','freezing'],c:0,h:'Think of a mesh with holes.',e:'Sieving separates solid particles according to size.'},
+      {section:8,q:'What does a simple electrical circuit need for current to flow?',a:['A complete path','An open gap','Only one loose wire','No power source'],c:0,h:'Electricity needs an unbroken route.',e:'A working circuit needs a complete path.'},
+      {section:9,q:'Which force pulls objects towards Earth?',a:['friction','gravity','magnetism','air resistance'],c:1,h:'This force gives objects weight.',e:'Gravity pulls objects towards Earth.'},
+      {section:9,q:'A parachute opens and a falling person slows down. Which force has increased?',a:['air resistance','gravity','magnetism','electrical force'],c:0,h:'The parachute meets much more air.',e:'Opening the parachute increases air resistance.'},
+      {section:10,q:'What is needed for a shadow to form?',a:['A light source and something blocking the light','Only sound','Only water','A magnet'],c:0,h:'Think about light being blocked.',e:'A shadow forms where an object blocks light.'},
+      {section:11,q:'What causes day and night on Earth?',a:['Earth rotating','Earth changing size','The Sun switching off','The Moon making darkness'],c:0,h:'Think about Earth spinning on its axis.',e:'Day and night occur as Earth rotates.'},
+      {section:12,q:'Why are repeated measurements useful in an investigation?',a:['They can improve confidence in the results','They guarantee the prediction is correct','They remove the need to record data','They change every variable'],c:0,h:'Think about checking whether a measurement is dependable.',e:'Repeated measurements can reveal unusual results and improve confidence in the evidence.'}
+    ]
+  }
+};
+</script>
+  <script>(() => {
+  'use strict';
+  const CONTENT = window.Y5Q_CONTENT;
+  const app = document.getElementById('app');
+  const storeKey = 'y5KnowledgeQuest.v2';
+  const avatars = ['🦉','🦊','🤖','🚀','🧙'];
+  const todayKey = () => new Date().toISOString().slice(0,10);
+  const fresh = () => ({
+    playerName:'Explorer', avatar:'🦉', xp:0, coins:20, stars:0, sound:true, bestStreak:0,
+    completed:{english:[],maths:[],science:[]}, attempts:{}, worldBoss:{english:false,maths:false,science:false},
+    daily:{date:todayKey(),correct:0,rewarded:false}
+  });
+  let state = load();
+  let activeWorld = null;
+  let activeSection = 0;
+  let quiz = null;
+  let deferredInstall = null;
+
+  function load(){
+    try{
+      const x=JSON.parse(localStorage.getItem(storeKey));
+      const base=fresh();
+      const merged=x?{...base,...x,completed:{...base.completed,...x.completed},worldBoss:{...base.worldBoss,...x.worldBoss},daily:{...base.daily,...x.daily}}:base;
+      if(merged.daily.date!==todayKey()) merged.daily={date:todayKey(),correct:0,rewarded:false};
+      return merged;
+    }catch{return fresh();}
+  }
+  function save(){ localStorage.setItem(storeKey,JSON.stringify(state)); updateTop(); }
+  function esc(s){ return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+  function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function completedSet(w){ return new Set(state.completed[w]||[]); }
+  function setCompleted(w,set){ state.completed[w]=[...set].sort((a,b)=>a-b); save(); }
+  function overall(){ const total=Object.values(CONTENT).reduce((n,w)=>n+w.sections.length,0); const done=Object.keys(CONTENT).reduce((n,w)=>n+completedSet(w).size,0); return {done,total,pct:Math.round(done/total*100)}; }
+  function worldPct(w){ return Math.round(completedSet(w).size/CONTENT[w].sections.length*100); }
+  function worldClass(w){ return CONTENT[w].theme; }
+  function updateTop(){
+    const put=(id,value)=>{const n=document.getElementById(id);if(n)n.textContent=value;};
+    put('starsTop',state.stars);
+    put('coinsTop',state.coins);
+    put('xpTop',state.xp);
+    put('levelTop',Math.max(1,Math.floor(state.xp/100)+1));
+    put('soundBtn',state.sound?'🔊':'🔇');
+    put('avatarTop',state.avatar);
+    put('playerTop',state.playerName||'Explorer');
+  }
+  function setActiveNav(key){
+    document.querySelectorAll('.side-link').forEach(b=>b.classList.remove('active'));
+    const map={home:'navHome',progress:'navProgress',english:'navEnglish',maths:'navMaths',science:'navScience',challenges:'navChallenges',achievements:'navAchievements',profile:'navProfile',bests:'navLeaderboard',settings:'navSettings'};
+    const el=document.getElementById(map[key]);if(el)el.classList.add('active');
+  }
+  function beep(kind='ok'){
+    if(!state.sound)return;
+    try{const AC=window.AudioContext||window.webkitAudioContext;const ctx=new AC();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=kind==='ok'?720:kind==='bad'?170:460;g.gain.setValueAtTime(.045,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.16);o.start();o.stop(ctx.currentTime+.17);}catch{}
+  }
+  function confetti(){const colors=['#7a5af8','#3973f4','#12b76a','#fdb022','#f04438','#36bffa'];for(let i=0;i<42;i++){const d=document.createElement('i');d.className='confetti';d.style.left=(Math.random()*100)+'vw';d.style.background=colors[i%colors.length];d.style.animationDelay=(Math.random()*.35)+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),2100);}}
+  function recordCorrect(){
+    if(state.daily.date!==todayKey()) state.daily={date:todayKey(),correct:0,rewarded:false};
+    state.daily.correct=Math.min(3,state.daily.correct+1);
+    if(state.daily.correct>=3&&!state.daily.rewarded){state.daily.rewarded=true;state.coins+=15;state.xp+=20;setTimeout(()=>showToast('Daily Quest complete! +15 coins · +20 XP'),350);}
+  }
+  function showToast(text){const n=document.createElement('div');n.className='pill';n.style.cssText='position:fixed;right:18px;bottom:18px;z-index:200;background:#101828;color:#fff;padding:12px 15px;box-shadow:0 12px 35px rgba(0,0,0,.25)';n.textContent=text;document.body.appendChild(n);setTimeout(()=>n.remove(),2600);}
+
+  function renderHome(){
+    activeWorld=null;quiz=null;setActiveNav('home');
+    const o=overall();
+    const daily=Math.min(3,state.daily.correct||0);
+    const latest=state.stars?('⭐ '+state.stars+' mastery star'+(state.stars===1?'':'s')):'Complete your first mission to earn a badge.';
+    app.innerHTML=`
+      <section class="hero hero-premium">
+        <div class="hero-premium-inner">
+          <div class="eyebrow">YEAR 5 • KNOWLEDGE ADVENTURE</div>
+          <h1><span>Year 5</span> Knowledge Quest</h1>
+          <p class="hero-tagline">THREE WORLDS. A BRIGHTER YOU.</p>
+          <div class="feature-pills">
+            <span>🎓 Learn key Year 5 skills</span><span>🎮 Play interactive missions</span><span>🏆 Earn rewards and badges</span><span>🌟 Build confidence</span>
+          </div>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="startAdventure">Start Adventure</button>
+            <button class="btn btn-secondary" id="quickPlay">⚡ Quick Challenge</button>
+          </div>
+        </div>
+        <div class="hero-castle" aria-hidden="true"><div class="castle-moon">✦</div><div class="castle-icon">🏰</div><div class="hero-scroll">EXPLORE<br>LEARN<br>ACHIEVE</div></div>
+      </section>
+
+      <section class="home-dashboard">
+        <div class="home-worlds">
+          <div class="section-head compact"><div><h2>Choose your world</h2><p>Explore a complete learning map across English, Maths and Science.</p></div></div>
+          <div class="world-grid premium-world-grid">${Object.entries(CONTENT).map(([k,w])=>worldCard(k,w)).join('')}</div>
+        </div>
+        <aside class="journey-card">
+          <h3>Your Journey</h3>
+          <div class="journey-ring" style="--progress:${o.pct*3.6}deg"><div><strong>${o.pct}%</strong><span>Overall Progress</span></div></div>
+          ${Object.entries(CONTENT).map(([k,w])=>`<div class="journey-row"><div><span>${w.icon} ${esc(w.label.replace(' World',''))}</span><b>${completedSet(k).size}/${w.sections.length}</b></div><div class="journey-track"><i class="${k}" style="width:${worldPct(k)}%"></i></div></div>`).join('')}
+          <div class="latest-achievement"><small>Latest achievement</small><strong>${latest}</strong></div>
+          <button class="btn btn-secondary journey-btn" id="journeyProgress">View progress</button>
+        </aside>
+      </section>
+
+      <section class="quick-grid">
+        <button class="quick-card" id="dailyCard"><span class="quick-icon">🎯</span><span><strong>Daily Challenge</strong><small>Answer 3 correctly today · ${daily}/3 complete</small></span><b>›</b></button>
+        <button class="quick-card" id="petCard"><span class="quick-icon">${state.avatar}</span><span><strong>My Avatar</strong><small>${esc(state.playerName)} · customise your explorer</small></span><b>›</b></button>
+        <button class="quick-card" id="bestCard"><span class="quick-icon">🏆</span><span><strong>Personal Bests</strong><small>Best streak: ${state.bestStreak}</small></span><b>›</b></button>
+        <button class="quick-card" id="teacherView"><span class="quick-icon">📊</span><span><strong>Parent / Teacher</strong><small>See learning progress at a glance</small></span><b>›</b></button>
+      </section>`;
+    document.getElementById('startAdventure').onclick=()=>{
+      const next=Object.keys(CONTENT).find(k=>worldPct(k)<100)||'english';openWorld(next);
+    };
+    document.getElementById('quickPlay').onclick=()=>startArcade();
+    document.getElementById('journeyProgress').onclick=renderTeacher;
+    document.getElementById('dailyCard').onclick=()=>startArcade(null,5);
+    document.getElementById('petCard').onclick=renderProfile;
+    document.getElementById('bestCard').onclick=renderBests;
+    document.getElementById('teacherView').onclick=renderTeacher;
+    app.querySelectorAll('[data-world]').forEach(b=>b.onclick=()=>openWorld(b.dataset.world));
+  }
+  function worldCard(k,w){
+    const pct=worldPct(k);
+    const copy=k==='english'?'Words open new worlds.':'maths'===k?'Numbers power your future.':'Discover. Question. Understand.';
+    const bullets=k==='english'?['Word classes, punctuation & sentences','Writing, stories & text types','Reading & comprehension','Spelling & tricky words']:k==='maths'?['Number & place value','Calculations & problem solving','Fractions, decimals & percentages','Measure, geometry & statistics']:['Living things & the human body','Materials & their properties','Forces, electricity, light & sound','Earth, space & scientific enquiry'];
+    return `<button class="world-card premium-world ${worldClass(k)}" data-world="${k}">
+      <div class="world-scene ${worldClass(k)}-scene"><div class="scene-orb scene-a"></div><div class="scene-orb scene-b"></div><span class="scene-symbol">${w.icon}</span><span class="section-count">${w.sections.length} SECTIONS</span></div>
+      <div class="world-content"><div class="world-title-row"><span class="world-icon">${w.icon}</span><div><h3>${esc(w.label)}</h3><p>${copy}</p></div></div>
+      <ul>${bullets.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+      <div class="progress-mini"><div class="progress"><i style="width:${pct}%"></i></div><div class="progress-label"><span>${completedSet(k).size}/${w.sections.length} mastered</span><span>${pct}%</span></div></div>
+      <span class="explore-cta">Explore ${esc(w.label)} →</span></div></button>`;
+  }
+
+  function openWorld(w){activeWorld=w;activeSection=0;setActiveNav(w);renderWorld();}
+  function renderWorld(){
+    const w=CONTENT[activeWorld],done=completedSet(activeWorld),pct=worldPct(activeWorld),bossReady=pct===100;
+    app.innerHTML=`<section class="panel"><div class="toolbar"><button class="btn btn-ghost" id="homeBtn">← Home</button><span class="pill">${w.icon} ${esc(w.label)}</span><span class="pill">${done.size}/${w.sections.length} sections mastered</span><span class="pill">${pct}% complete</span></div></section>
+    <div class="grid-2" style="margin-top:16px">
+      <section class="panel"><div class="section-head" style="margin-top:0"><div><h2>Adventure Map</h2><p>Pick a mission. Every mission represents a major learning section.</p></div></div><div class="map">${w.sections.map((s,i)=>missionCard(s,i,done)).join('')}</div></section>
+      <aside>
+        <section class="panel"><h3>World rewards</h3><div class="badge-grid"><div class="badge ${pct>=25?'unlocked':''}"><strong>🥉 Explorer</strong><span class="muted">25% complete</span></div><div class="badge ${pct>=50?'unlocked':''}"><strong>🥈 Pathfinder</strong><span class="muted">50% complete</span></div><div class="badge ${pct>=75?'unlocked':''}"><strong>🥇 Scholar</strong><span class="muted">75% complete</span></div><div class="badge ${pct===100?'unlocked':''}"><strong>🏆 World Master</strong><span class="muted">100% complete</span></div></div></section>
+        <section class="panel" style="margin-top:16px"><h3>Final World Challenge</h3><p class="muted">Complete every section, then take a 5-question boss challenge.</p><button class="btn ${bossReady?'btn-dark':'btn-ghost'}" id="bossBtn" ${bossReady?'':'disabled'}>${state.worldBoss[activeWorld]?'🏆 Boss defeated':'⚔️ Start Boss Challenge'}</button></section>
+        <section class="panel" style="margin-top:16px"><h3>How to play</h3><p class="muted">Learn the section, inspect every topic, complete the 3-question challenge and earn a mastery star.</p></section>
+      </aside>
+    </div>`;
+    document.getElementById('homeBtn').onclick=renderHome;
+    document.getElementById('bossBtn').onclick=()=>{if(bossReady)startBoss(activeWorld);};
+    app.querySelectorAll('[data-section]').forEach(b=>b.onclick=()=>{activeSection=Number(b.dataset.section);renderMission();});
+  }
+  function missionCard(s,i,done){const qCount=CONTENT[activeWorld].questions.filter(q=>q.section===i).length;return `<button class="mission ${done.has(i)?'done':''}" data-section="${i}"><span class="mission-num">${done.has(i)?'✓':i+1}</span><span><span class="mission-title">${esc(s.title)}</span><span class="mission-sub">${s.topics.length} textbook topics</span><span class="mission-progress">${qCount} challenge question${qCount===1?'':'s'} in this build</span></span><span class="mission-star">${done.has(i)?'⭐':'›'}</span></button>`;}
+
+  function renderMission(){
+    const w=CONTENT[activeWorld],s=w.sections[activeSection],done=completedSet(activeWorld).has(activeSection),qCount=questionPool(activeWorld,activeSection).length;
+    app.innerHTML=`<section class="panel">
+      <div class="toolbar"><button class="btn btn-ghost" id="backWorld">← ${esc(w.label)}</button><span class="pill">Mission ${activeSection+1}/${w.sections.length}</span>${done?'<span class="pill">⭐ Mastered</span>':''}</div>
+      <div class="section-head"><div><h2>${esc(s.title)}</h2><p>Learn first. Think aloud. Then enter the challenge arena.</p></div><div style="font-size:46px">${w.icon}</div></div>
+      <div class="lesson-steps"><div class="learn-step"><b>1. 📖 Learn</b><span>Read the mission briefing and connect it to the section topics.</span></div><div class="learn-step"><b>2. 🗣️ Explain</b><span>Use the explain-it prompt to put the idea into your own words.</span></div><div class="learn-step"><b>3. 🎯 Play</b><span>Complete three challenge rounds and aim for mastery.</span></div></div>
+      <div class="lesson-box"><h4>📖 Mission briefing</h4><p>${esc(s.lesson)}</p></div>
+      <div class="lesson-box"><h4>🧭 Everything in this section</h4><div class="topic-chips">${s.topics.map(t=>`<span class="topic-chip">${esc(t)}</span>`).join('')}</div></div>
+      <div class="lesson-box"><h4>🗣️ Explain-it mission</h4><p>${esc(s.explain)}</p></div>
+      <div class="hero-actions" style="margin-top:16px"><button class="btn btn-accent" id="startChallenge">🎯 Start 3-Round Challenge</button><button class="btn btn-ghost" id="randomChallenge">🎲 Surprise Me</button></div>
+      <p class="muted" style="font-size:12px;margin-bottom:0">This section currently has ${qCount} original challenge question${qCount===1?'':'s'} in rotation. More questions can be added without changing your progress.</p>
+    </section>`;
+    document.getElementById('backWorld').onclick=renderWorld;
+    document.getElementById('startChallenge').onclick=()=>startSectionQuiz(activeWorld,activeSection);
+    document.getElementById('randomChallenge').onclick=()=>startArcade(activeWorld,5);
+  }
+
+  function questionPool(world,section=null){const qs=CONTENT[world].questions;return section===null?qs:qs.filter(q=>q.section===section);}
+  function chooseQuestion(world,section=null){const pool=questionPool(world,section);if(!pool.length)return null;const key=world+':'+(section===null?'all':section);const n=state.attempts[key]||0;state.attempts[key]=n+1;save();return pool[n%pool.length];}
+  function randomQuestion(world=null){const w=world||shuffle(Object.keys(CONTENT))[0];const q=shuffle(CONTENT[w].questions)[0];return {world:w,q};}
+  function startSectionQuiz(world,section){const q=chooseQuestion(world,section);if(!q)return;quiz={mode:'section',world,section,q,round:1,total:3,correct:0,streak:0,hint:false,removed:[]};renderQuiz();}
+  function startArcade(world=null,total=10){const pick=randomQuestion(world);quiz={mode:'arcade',world:pick.world,section:pick.q.section,q:pick.q,round:1,total,correct:0,streak:0,hint:false,removed:[]};renderQuiz();}
+  function startBoss(world){const pick=randomQuestion(world);quiz={mode:'boss',world,section:pick.q.section,q:pick.q,round:1,total:5,correct:0,streak:0,hint:false,removed:[]};renderQuiz();}
+
+  function renderQuiz(){
+    const w=CONTENT[quiz.world],s=w.sections[quiz.section],q=quiz.q,pct=Math.round((quiz.round-1)/quiz.total*100);
+    const label=quiz.mode==='section'?'Mission Challenge':quiz.mode==='boss'?'World Boss Challenge':'Arcade Mode';
+    app.innerHTML=`<section class="panel challenge-shell">
+      <div class="quiz-progress"><i style="width:${pct}%"></i></div>
+      <div class="quiz-meta"><span class="pill">${w.icon} ${esc(s.title)}</span><span class="pill">Round ${quiz.round}/${quiz.total}</span><span class="pill">✅ ${quiz.correct}</span><span class="pill">🔥 ${quiz.streak}</span></div>
+      <div class="eyebrow" style="color:#667085">${label}</div>
+      <h2 class="question">${esc(q.q)}</h2>
+      <div class="answers" id="answerGrid">${q.a.map((x,i)=>`<button class="answer" data-answer="${i}"><strong>${String.fromCharCode(65+i)}.</strong> ${esc(x)}</button>`).join('')}</div>
+      <div id="feedback" class="feedback hidden"></div>
+      <div class="power-row"><button class="power" id="hintPower">💡 Hint <small>−2 coins</small></button><button class="power" id="fiftyPower">✂️ 50/50 <small>−3 coins</small></button><button class="power" id="quitQuiz">← Leave challenge</button></div>
+    </section>`;
+    app.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>submitAnswer(Number(b.dataset.answer)));
+    document.getElementById('hintPower').onclick=useHint;
+    document.getElementById('fiftyPower').onclick=useFifty;
+    document.getElementById('quitQuiz').onclick=()=>quiz.mode==='section'?renderMission():quiz.mode==='boss'?renderWorld():renderHome();
+  }
+  function useHint(){if(quiz.hint)return;if(state.coins<2){showModal('Not enough coins','Complete challenges to earn more coins.');return;}state.coins-=2;quiz.hint=true;save();const f=document.getElementById('feedback');f.classList.remove('hidden');f.innerHTML='<strong>Hint:</strong> '+esc(quiz.q.h);beep('hint');}
+  function useFifty(){if(quiz.removed.length)return;if(state.coins<3){showModal('Not enough coins','Complete challenges to earn more coins.');return;}const wrong=[0,1,2,3].filter(i=>i!==quiz.q.c);quiz.removed=shuffle(wrong).slice(0,2);state.coins-=3;save();quiz.removed.forEach(i=>{const b=document.querySelector(`[data-answer="${i}"]`);if(b){b.disabled=true;b.style.visibility='hidden';}});beep('hint');}
+  function submitAnswer(i){
+    const correct=i===quiz.q.c;app.querySelectorAll('[data-answer]').forEach(b=>b.disabled=true);
+    const chosen=document.querySelector(`[data-answer="${i}"]`),right=document.querySelector(`[data-answer="${quiz.q.c}"]`);if(right)right.classList.add('correct');if(!correct&&chosen)chosen.classList.add('wrong');
+    const feedback=document.getElementById('feedback');feedback.classList.remove('hidden');
+    if(correct){const gain=quiz.hint?8:12;state.xp+=gain;state.coins+=3;state.stars+=1;quiz.correct++;quiz.streak++;state.bestStreak=Math.max(state.bestStreak,quiz.streak);recordCorrect();beep('ok');feedback.innerHTML=`<strong>Great job!</strong> ${esc(quiz.q.e)}<br><strong>+${gain} XP · +3 coins · +1 star</strong>`;confetti();}
+    else{quiz.streak=0;beep('bad');feedback.innerHTML=`<strong>Good try.</strong> ${esc(quiz.q.e)}<br>Use the explanation to strengthen your next answer.`;}
+    save();
+    const action=document.createElement('div');action.className='hero-actions';action.style.marginTop='14px';const next=document.createElement('button');next.className='btn btn-dark';next.textContent=quiz.round>=quiz.total?'Finish Challenge':'Next Round';next.onclick=nextQuestion;action.appendChild(next);feedback.appendChild(action);
+  }
+  function nextQuestion(){
+    if(quiz.round>=quiz.total){finishQuiz();return;}
+    quiz.round++;quiz.hint=false;quiz.removed=[];
+    if(quiz.mode==='section'){quiz.q=chooseQuestion(quiz.world,quiz.section);}
+    else{const pick=randomQuestion(quiz.world);quiz.world=pick.world;quiz.q=pick.q;quiz.section=pick.q.section;}
+    renderQuiz();
+  }
+  function finishQuiz(){
+    if(quiz.mode==='section'){
+      const passed=quiz.correct>=2;
+      if(passed){const set=completedSet(quiz.world);set.add(quiz.section);setCompleted(quiz.world,set);showModal('Mission mastered!','You scored '+quiz.correct+' out of '+quiz.total+'. This textbook section is now marked as mastered.',()=>renderWorld());}
+      else{showModal('Mission complete','You scored '+quiz.correct+' out of '+quiz.total+'. Review the lesson and try again for mastery.',()=>renderMission());}
+      return;
+    }
+    if(quiz.mode==='boss'){
+      const won=quiz.correct>=4;if(won){state.worldBoss[quiz.world]=true;state.coins+=30;state.xp+=50;save();confetti();showModal('World Boss defeated!','You scored '+quiz.correct+'/5 and earned +30 coins and +50 XP.',()=>renderWorld());}else{showModal('Boss challenge complete','You scored '+quiz.correct+'/5. Reach 4/5 to defeat the boss.',()=>renderWorld());}return;
+    }
+    showModal('Arcade run complete','You scored '+quiz.correct+' out of '+quiz.total+'. Keep playing to grow your XP and streak.',renderHome);
+  }
+
+  function renderTeacher(){
+    setActiveNav('progress');
+    const o=overall();
+    app.innerHTML=`<section class="panel"><div class="toolbar"><button class="btn btn-ghost" id="teacherBack">← Home</button><span class="pill">Parent / Teacher View</span></div><div class="section-head"><div><h2>${esc(state.playerName)}'s learning progress</h2><p>Progress is stored only in this browser on this device.</p></div></div>
+      <section class="stats-strip"><div class="stat-card"><small>Overall</small><strong>${o.pct}%</strong></div><div class="stat-card"><small>XP</small><strong>${state.xp}</strong></div><div class="stat-card"><small>Stars</small><strong>${state.stars}</strong></div><div class="stat-card"><small>Best streak</small><strong>${state.bestStreak}</strong></div></section>
+      <div style="margin-top:18px">${Object.entries(CONTENT).map(([k,w])=>`<div class="teacher-row"><div><strong>${w.icon} ${esc(w.label)}</strong><div class="muted">${completedSet(k).size} of ${w.sections.length} sections mastered ${state.worldBoss[k]?'· Boss defeated 🏆':''}</div></div><strong>${worldPct(k)}%</strong></div>`).join('')}</div>
+      <div class="lesson-box"><h4>📚 Coverage</h4><p>The learning map covers the full English, Maths and Science section structure used to build this game, with progress shown by subject and section.</p></div>
+      <div class="hero-actions"><button id="resetProgress" class="btn btn-ghost">Reset progress</button></div></section>`;
+    document.getElementById('teacherBack').onclick=renderHome;
+    document.getElementById('resetProgress').onclick=()=>showModal('Reset all progress?','This clears stars, XP, coins, streaks, mastered sections and boss badges on this device.',()=>{state=fresh();save();renderTeacher();},true);
+  }
+
+  function renderChallenges(){
+    setActiveNav('challenges');
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Challenge Centre</div><h2>Choose how you want to play</h2><p class="muted">Mix the three subjects or focus on one world.</p><div class="challenge-choice-grid">
+      <button class="challenge-choice" data-arcade="all"><span>⚡</span><strong>10-Question Arcade</strong><small>Questions from all three worlds</small></button>
+      <button class="challenge-choice" data-arcade="english"><span>📚</span><strong>English Sprint</strong><small>5 quick English questions</small></button>
+      <button class="challenge-choice" data-arcade="maths"><span>🔢</span><strong>Maths Sprint</strong><small>5 quick Maths questions</small></button>
+      <button class="challenge-choice" data-arcade="science"><span>🔬</span><strong>Science Sprint</strong><small>5 quick Science questions</small></button>
+    </div></section>`;
+    app.querySelectorAll('[data-arcade]').forEach(b=>b.onclick=()=>{const v=b.dataset.arcade;startArcade(v==='all'?null:v,v==='all'?10:5);});
+  }
+
+  function achievementData(){
+    const o=overall();
+    return [
+      ['🌱','First Step','Master your first section',o.done>=1],
+      ['🔥','On a Roll','Reach a 5-answer streak',state.bestStreak>=5],
+      ['📚','English Explorer','Master every English section',worldPct('english')===100],
+      ['🔢','Maths Master','Master every Maths section',worldPct('maths')===100],
+      ['🔬','Science Investigator','Master every Science section',worldPct('science')===100],
+      ['👑','Knowledge Champion','Master all three worlds',o.pct===100]
+    ];
+  }
+  function renderAchievements(){
+    setActiveNav('achievements');
+    const data=achievementData();
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Achievement Hall</div><h2>Your badges</h2><p class="muted">Every badge marks real progress through the learning worlds.</p><div class="achievement-grid">${data.map(([i,t,d,u])=>`<div class="achievement-card ${u?'unlocked':''}"><span>${i}</span><strong>${t}</strong><small>${d}</small><b>${u?'Unlocked':'Locked'}</b></div>`).join('')}</div></section>`;
+  }
+  function renderBests(){
+    setActiveNav('bests');
+    const o=overall();
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Personal Bests</div><h2>Beat your own score</h2><p class="muted">Progress stays private on this device, so learners can focus on beating their own best rather than competing with strangers.</p><section class="stats-strip"><div class="stat-card"><small>Best streak</small><strong>${state.bestStreak}</strong></div><div class="stat-card"><small>Knowledge XP</small><strong>${state.xp}</strong></div><div class="stat-card"><small>Stars</small><strong>${state.stars}</strong></div><div class="stat-card"><small>Overall mastery</small><strong>${o.pct}%</strong></div></section><div class="lesson-box"><h4>🏆 Next target</h4><p>${o.pct<100?'Complete another textbook section or improve your answer streak to set a new personal best.':'You have mastered every section. Keep using Arcade mode to sharpen speed and recall.'}</p></div></section>`;
+  }
+  function renderSettings(){
+    setActiveNav('settings');
+    app.innerHTML=`<section class="panel feature-view"><div class="eyebrow" style="color:#667085">Settings</div><h2>Game preferences</h2><div class="settings-list"><button id="settingSound" class="setting-row"><span><strong>Game sound</strong><small>Short feedback tones for answers</small></span><b>${state.sound?'On':'Off'}</b></button><button id="settingProfile" class="setting-row"><span><strong>Player profile</strong><small>Change nickname and avatar</small></span><b>›</b></button><button id="settingPrivacy" class="setting-row"><span><strong>Privacy</strong><small>No account or public child profile is required</small></span><b>›</b></button><button id="settingReset" class="setting-row danger"><span><strong>Reset progress</strong><small>Clear progress saved on this device</small></span><b>›</b></button></div></section>`;
+    document.getElementById('settingSound').onclick=()=>{state.sound=!state.sound;save();renderSettings();};
+    document.getElementById('settingProfile').onclick=renderProfile;
+    document.getElementById('settingPrivacy').onclick=()=>showModal('Privacy','No account is required. The nickname and learning progress are stored only in this browser on this device. This build does not send that information to a server.');
+    document.getElementById('settingReset').onclick=()=>showModal('Reset all progress?','This clears stars, XP, coins, streaks and mastered sections on this device.',()=>{state=fresh();save();renderSettings();},true);
+  }
+  function renderSearch(query){
+    const q=query.trim().toLowerCase();if(!q){renderHome();return;}
+    setActiveNav('home');
+    const results=[];
+    Object.entries(CONTENT).forEach(([wk,w])=>w.sections.forEach((s,si)=>{
+      const hay=[s.title,s.lesson,s.explain,...s.topics].join(' ').toLowerCase();
+      if(hay.includes(q))results.push({wk,w,si,s});
+    }));
+    app.innerHTML=`<section class="panel feature-view"><div class="toolbar"><button class="btn btn-ghost" id="searchBack">← Home</button><span class="pill">Search</span></div><div class="section-head"><div><h2>Results for “${esc(query)}”</h2><p>${results.length} matching section${results.length===1?'':'s'}.</p></div></div><div class="search-results">${results.length?results.map((r,i)=>`<button class="search-result" data-r="${i}"><span>${r.w.icon}</span><span><strong>${esc(r.s.title)}</strong><small>${esc(r.w.label)} · ${r.s.topics.filter(t=>t.toLowerCase().includes(q)).slice(0,3).map(esc).join(', ')||'Relevant section'}</small></span><b>›</b></button>`).join(''):'<div class="lesson-box"><p>No section matched that search. Try a broader keyword such as fractions, punctuation, forces, reading or materials.</p></div>'}</div></section>`;
+    document.getElementById('searchBack').onclick=renderHome;
+    app.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const r=results[Number(b.dataset.r)];activeWorld=r.wk;activeSection=r.si;setActiveNav(r.wk);renderMission();});
+  }
+
+  function renderProfile(){
+    const back=document.createElement('div');back.className='modal-backdrop';back.innerHTML=`<div class="modal"><button class="close-x" aria-label="Close">×</button><div class="eyebrow" style="color:#667085">Player profile</div><h2>Make the adventure yours</h2><div class="profile-grid">${avatars.map(a=>`<button type="button" class="avatar-btn ${a===state.avatar?'active':''}" data-avatar="${a}">${a}</button>`).join('')}</div><div class="form-row"><label for="playerNameInput">Player name or nickname</label><input id="playerNameInput" maxlength="20" value="${esc(state.playerName)}" autocomplete="off" /></div><div class="hero-actions"><button class="btn btn-accent" id="saveProfile">Save profile</button><button class="btn btn-ghost" id="privacyInfo">Privacy</button></div></div>`;document.body.appendChild(back);
+    let selected=state.avatar;back.querySelectorAll('[data-avatar]').forEach(b=>b.onclick=()=>{selected=b.dataset.avatar;back.querySelectorAll('[data-avatar]').forEach(x=>x.classList.toggle('active',x===b));});
+    const close=()=>back.remove();back.querySelector('.close-x').onclick=close;back.querySelector('#saveProfile').onclick=()=>{const v=back.querySelector('#playerNameInput').value.trim();state.playerName=(v||'Explorer').slice(0,20);state.avatar=selected;save();close();renderHome();};back.querySelector('#privacyInfo').onclick=()=>showModal('Privacy','No account is required. The nickname and learning progress are stored only in this browser on this device. This build does not send that information to a server.');
+  }
+
+  function showModal(title,text,onOk=null,danger=false){const back=document.createElement('div');back.className='modal-backdrop';back.innerHTML=`<div class="modal"><button class="close-x" aria-label="Close">×</button><h2>${esc(title)}</h2><p class="muted">${esc(text)}</p><div class="hero-actions"><button class="btn ${danger?'btn-dark':'btn-accent'}" id="modalOk">${onOk?'Continue':'OK'}</button></div></div>`;document.body.appendChild(back);const close=()=>back.remove();back.querySelector('.close-x').onclick=close;back.querySelector('#modalOk').onclick=()=>{close();if(onOk)onOk();};}
+
+  document.getElementById('brandBtn').onclick=renderHome;
+  document.getElementById('profileBtn').onclick=renderProfile;
+  document.getElementById('soundBtn').onclick=()=>{state.sound=!state.sound;save();};
+  document.getElementById('navHome').onclick=renderHome;
+  document.getElementById('navProgress').onclick=renderTeacher;
+  document.getElementById('navEnglish').onclick=()=>openWorld('english');
+  document.getElementById('navMaths').onclick=()=>openWorld('maths');
+  document.getElementById('navScience').onclick=()=>openWorld('science');
+  document.getElementById('navChallenges').onclick=renderChallenges;
+  document.getElementById('navAchievements').onclick=renderAchievements;
+  document.getElementById('navProfile').onclick=renderProfile;
+  document.getElementById('navLeaderboard').onclick=renderBests;
+  document.getElementById('navSettings').onclick=renderSettings;
+  const search=document.getElementById('globalSearch');
+  search.addEventListener('keydown',e=>{if(e.key==='Enter')renderSearch(search.value);});
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;document.getElementById('installBtn').classList.remove('hidden');});
+  document.getElementById('installBtn').onclick=async()=>{if(!deferredInstall)return;deferredInstall.prompt();await deferredInstall.userChoice;deferredInstall=null;document.getElementById('installBtn').classList.add('hidden');};
+  updateTop();renderHome();
+  
+})();
+</script>
+</body>
+</html>
